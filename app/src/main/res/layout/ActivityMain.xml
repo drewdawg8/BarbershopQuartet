@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_top_margin">
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+        <Button
+            android:text="@string/button_launch_barber_activity"
+            android:textSize="@dimen/button_text_size"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/button_bottom_margin"
+            android:layout_height="@dimen/button_vertical_dimension" />
+        <Button
+            android:text="@string/button_launch_customer_activity"
+            android:textSize="@dimen/button_text_size"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/button_bottom_margin"
+            android:layout_height="@dimen/button_vertical_dimension" />
+    </LinearLayout>
+</RelativeLayout>
