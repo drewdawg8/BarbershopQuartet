@@ -5,7 +5,6 @@
     android:orientation="vertical"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:orientation="vertical"
     android:layout_centerInParent="true">
     <TextView
         android:layout_width="match_parent"
@@ -34,14 +33,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Upload a picture of your desired haircut (optional):"
-        android:textSize="15"
-        android:paddingTop=""
+        android:textSize="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10sp"
         />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Upload Photo"
         />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Additional notes:"
+        android:textSize="15dp"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
