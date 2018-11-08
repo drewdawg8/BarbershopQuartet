@@ -19,12 +19,14 @@
             android:textSize="@dimen/button_text_size"
             android:layout_width="match_parent"
             android:layout_marginBottom="@dimen/button_bottom_margin"
-            android:layout_height="@dimen/button_vertical_dimension" />
+            android:layout_height="@dimen/button_vertical_dimension"
+            android:onClick="onClickOpenBarberLogIn"/>
         <Button
             android:text="@string/button_launch_customer_activity"
             android:textSize="@dimen/button_text_size"
             android:layout_width="match_parent"
             android:layout_marginBottom="@dimen/button_bottom_margin"
-            android:layout_height="@dimen/button_vertical_dimension" />
+            android:layout_height="@dimen/button_vertical_dimension"
+            android:onClick="onClickCustomerSignUp"/>
     </LinearLayout>
 </RelativeLayout>

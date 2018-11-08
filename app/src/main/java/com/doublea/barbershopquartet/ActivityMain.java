@@ -50,4 +50,12 @@ public class ActivityMain extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void onClickOpenBarberLogIn(View view) {
+
+    }
+
+    public void onClickCustomerSignUp(View view) {
+
+    }
 }
