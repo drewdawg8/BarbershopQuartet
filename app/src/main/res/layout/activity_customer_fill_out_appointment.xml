@@ -32,6 +32,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Upload a picture of your desired haircut (optional):"
+        android:textSize="15"
+        android:paddingTop=""
         />
     <Button
         android:layout_width="match_parent"
