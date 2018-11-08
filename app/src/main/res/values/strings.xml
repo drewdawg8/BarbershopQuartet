@@ -6,5 +6,8 @@
     <string name="title_activity_barber_login">ActivityBarberLogin</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name= "prompt_barber_login">Please enter E-mail and Password:</string>
+    <string name="prompt_barber_login">Please enter E-mail and Password:</string>
+    <string name="title_activity_customer_fill_out_appointment">
+        activity_customer_fill_out_appointment
+    </string>
 </resources>
