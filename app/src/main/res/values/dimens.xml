@@ -6,4 +6,5 @@
     <dimen name="button_text_size">19sp</dimen>
     <dimen name="text_size">19sp</dimen>
     <dimen name="activity_top_margin">15dp</dimen>
+    <dimen name="activity_all_margins">15dp</dimen>
 </resources>
