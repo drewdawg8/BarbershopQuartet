@@ -26,7 +26,12 @@
         <activity
             android:name=".activity_customer_fill_out_appointment"
             android:label="@string/title_activity_customer_fill_out_appointment"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ActivityCustomerAppointmentRequest" />
+        <activity android:name=".ActivityBarberMenu" />
+        <activity android:name=".ActivityBarberSelectAppointment" />
+        <activity android:name=".ActivityBarberManageAppointment" />
+        <activity android:name=".ActivityManageSchedule"></activity>
     </application>
 
 </manifest>
