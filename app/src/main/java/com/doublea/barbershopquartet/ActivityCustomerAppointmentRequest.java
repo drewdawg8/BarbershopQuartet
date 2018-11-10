@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
 
@@ -14,6 +16,14 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
     }
 
     public void onClickRegister(View view) {
-        Intent startNewActivity = new Intent(this, activity_customer_fill_out_appointment.class);
+        Spinner firstSpinner = (Spinner)findViewById(R.id.spinner1);
+        Object firstSpinnerSelection = firstSpinner.getSelectedItem(); // for now until we load data to firebase
+        Spinner secondSpinner = (Spinner)findViewById(R.id.spinner2);
+        Object secondSpinnerSelection = secondSpinner.getSelectedItem(); // for now until we load data to firebase
+        //if(firstSpinnerSelection != null || secondSpinnerSelection != null){
+            Intent startNewActivity = new Intent(this, activity_customer_fill_out_appointment.class);
+            startActivity(startNewActivity);
+       // }
+
     }
 }

@@ -27,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_marginBottom="@dimen/button_bottom_margin"
             android:layout_height="@dimen/button_vertical_dimension"
-            android:onClick="onClickCustomerSignUp"/>
+            android:onClick="onClickCustomerSignUp"
+            />
     </LinearLayout>
 </RelativeLayout>
