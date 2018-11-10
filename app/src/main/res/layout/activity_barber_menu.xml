@@ -11,16 +11,18 @@
         android:orientation="vertical"
         android:layout_centerInParent="true">
         <Button
-            android:text="Select appoint"
+            android:text="Select Appointments"
             android:textSize="@dimen/button_text_size"
             android:layout_width="match_parent"
             android:layout_marginBottom="@dimen/button_bottom_margin"
-            android:layout_height="@dimen/button_vertical_dimension" />
+            android:layout_height="@dimen/button_vertical_dimension"
+            android:onClick="onClickSelectAppointments"/>
         <Button
-            android:text="@string/button_launch_customer_activity"
+            android:text="Manage Schedule"
             android:textSize="@dimen/button_text_size"
             android:layout_width="match_parent"
             android:layout_marginBottom="@dimen/button_bottom_margin"
-            android:layout_height="@dimen/button_vertical_dimension" />
+            android:layout_height="@dimen/button_vertical_dimension"
+            android:onClick="onClickManageSchedule"/>
     </LinearLayout>
 </RelativeLayout>
