@@ -30,9 +30,17 @@
             android:layout_marginBottom="@dimen/edit_text_bottom_margin"/>
     </LinearLayout>
     <TextView
+        android:id="@+id/tv_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll_capture_logins"
         android:text="Register"
         android:textColor="#0000ff"/>
+    <Button
+        android:layout_marginTop="20dp"
+        android:text="LogIn"
+        android:id="@+id/btn_login"
+        android:layout_below="@+id/tv_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </RelativeLayout>
