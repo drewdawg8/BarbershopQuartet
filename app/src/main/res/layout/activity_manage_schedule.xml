@@ -48,56 +48,56 @@
                     android:layout_height="wrap_content"
                     android:text="9:00 A.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickTimeSlot0"/>
+                    android:onClick="onClickRadioButton"/>
                 <RadioButton
                     android:id="@+id/radio_timeslot1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="9:30 A.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickTimeSlot1"/>
+                    android:onClick="onClickRadioButton"/>
                 <RadioButton
                     android:id="@+id/radio_timeslot2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="10:00 A.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickTimeSlot2"/>
+                    android:onClick="onClickRadioButton"/>
                 <RadioButton
                     android:id="@+id/radio_timeslot3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="10:30 A.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickTimeSlot3"/>
+                    android:onClick="onClickRadioButton"/>
                 <RadioButton
                     android:id="@+id/radio_timeslot4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="11:00 A.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickTimeSlot4"/>
+                    android:onClick="onClickRadioButton"/>
                 <RadioButton
                     android:id="@+id/radio_timeslot5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="11:30 A.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickTimeSlot5"/>
+                    android:onClick="onClickRadioButton"/>
                 <RadioButton
                     android:id="@+id/radio_timeslot6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="12:00 P.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickTimeSlot6"/>
+                    android:onClick="onClickRadioButton"/>
                 <RadioButton
                     android:id="@+id/radio_timeslot7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="12:30 P.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickTimeSlot7"/>
+                    android:onClick="onClickRadioButton"/>
             </LinearLayout>
 
             <LinearLayout
@@ -111,56 +111,56 @@
                     android:layout_height="wrap_content"
                     android:text="1:00 P.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickTimeSlot8"/>
+                    android:onClick="onClickRadioButton"/>
                 <RadioButton
                     android:id="@+id/radio_timeslot9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="1:30 P.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickTimeSlot9"/>
+                    android:onClick="onClickRadioButton"/>
                 <RadioButton
                     android:id="@+id/radio_timeslot10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="2:00 P.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickTimeSlot10"/>
+                    android:onClick="onClickRadioButton"/>
                 <RadioButton
                     android:id="@+id/radio_timeslot11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="2:30 P.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickTimeSlot11"/>
+                    android:onClick="onClickRadioButton"/>
                 <RadioButton
                     android:id="@+id/radio_timeslot12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="3:00 P.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickTimeSlot12"/>
+                    android:onClick="onClickRadioButton"/>
                 <RadioButton
                     android:id="@+id/radio_timeslot13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="3:30 P.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickTimeSlot13"/>
+                    android:onClick="onClickRadioButton"/>
                 <RadioButton
                     android:id="@+id/radio_timeslot14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="4:00 P.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickTimeSlot14"/>
+                    android:onClick="onClickRadioButton"/>
                 <RadioButton
                     android:id="@+id/radio_timeslot15"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="4:30 P.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickTimeSlot15"/>
+                    android:onClick="onClickRadioButton"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
