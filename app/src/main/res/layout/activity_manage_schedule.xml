@@ -1,8 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp">
-</LinearLayout>
+    android:layout_margin="@dimen/activity_all_margins">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select month:"
+            android:textSize="@dimen/text_size"/>
+        <Spinner
+            android:id="@+id/spinner_month"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></Spinner>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select day:"
+            android:textSize="@dimen/text_size"/>
+        <Spinner
+            android:id="@+id/spinner_day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></Spinner>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select timeslots:"
+            android:textSize="@dimen/text_size"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <RadioButton
+                    android:id="@+id/radio_timeslot0"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="9:00 A.M."
+                    android:textSize="@dimen/text_size"
+                    android:onClick="onClickTimeSlot0"/>
+                <RadioButton
+                    android:id="@+id/radio_timeslot1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="9:30 A.M."
+                    android:textSize="@dimen/text_size"
+                    android:onClick="onClickTimeSlot1"/>
+                <RadioButton
+                    android:id="@+id/radio_timeslot2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="10:00 A.M."
+                    android:textSize="@dimen/text_size"
+                    android:onClick="onClickTimeSlot2"/>
+                <RadioButton
+                    android:id="@+id/radio_timeslot3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="10:30 A.M."
+                    android:textSize="@dimen/text_size"
+                    android:onClick="onClickTimeSlot3"/>
+                <RadioButton
+                    android:id="@+id/radio_timeslot4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="11:00 A.M."
+                    android:textSize="@dimen/text_size"
+                    android:onClick="onClickTimeSlot4"/>
+                <RadioButton
+                    android:id="@+id/radio_timeslot5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="11:30 A.M."
+                    android:textSize="@dimen/text_size"
+                    android:onClick="onClickTimeSlot5"/>
+                <RadioButton
+                    android:id="@+id/radio_timeslot6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="12:00 P.M."
+                    android:textSize="@dimen/text_size"
+                    android:onClick="onClickTimeSlot6"/>
+                <RadioButton
+                    android:id="@+id/radio_timeslot7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="12:30 P.M."
+                    android:textSize="@dimen/text_size"
+                    android:onClick="onClickTimeSlot7"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <RadioButton
+                    android:id="@+id/radio_timeslot8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1:00 P.M."
+                    android:textSize="@dimen/text_size"
+                    android:onClick="onClickTimeSlot8"/>
+                <RadioButton
+                    android:id="@+id/radio_timeslot9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1:30 P.M."
+                    android:textSize="@dimen/text_size"
+                    android:onClick="onClickTimeSlot9"/>
+                <RadioButton
+                    android:id="@+id/radio_timeslot10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2:00 P.M."
+                    android:textSize="@dimen/text_size"
+                    android:onClick="onClickTimeSlot10"/>
+                <RadioButton
+                    android:id="@+id/radio_timeslot11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2:30 P.M."
+                    android:textSize="@dimen/text_size"
+                    android:onClick="onClickTimeSlot11"/>
+                <RadioButton
+                    android:id="@+id/radio_timeslot12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="3:00 P.M."
+                    android:textSize="@dimen/text_size"
+                    android:onClick="onClickTimeSlot12"/>
+                <RadioButton
+                    android:id="@+id/radio_timeslot13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="3:30 P.M."
+                    android:textSize="@dimen/text_size"
+                    android:onClick="onClickTimeSlot13"/>
+                <RadioButton
+                    android:id="@+id/radio_timeslot14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="4:00 P.M."
+                    android:textSize="@dimen/text_size"
+                    android:onClick="onClickTimeSlot14"/>
+                <RadioButton
+                    android:id="@+id/radio_timeslot15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="4:30 P.M."
+                    android:textSize="@dimen/text_size"
+                    android:onClick="onClickTimeSlot15"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <Button
+        android:id="@+id/button_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit Changes"
+        android:layout_alignParentBottom="true"
+        android:onClick="onClickSubmit"
+        />
+</RelativeLayout>
