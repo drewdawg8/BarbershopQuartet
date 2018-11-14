@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "426981118075",
+    "firebase_url": "https://barbershopquartet-24f37.firebaseio.com",
+    "project_id": "barbershopquartet-24f37",
+    "storage_bucket": "barbershopquartet-24f37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:426981118075:android:71adde45d4b8a710",
+        "android_client_info": {
+          "package_name": "com.doublea.barbershopquartet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "426981118075-k5u1gm3jhg1e6lbp6r42om1is2ufdd4n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.doublea.barbershopquartet",
+            "certificate_hash": "c3adc3c71f55863983b3db45b9d330339f1e6064"
+          }
+        },
+        {
+          "client_id": "426981118075-d058dv0c6is4drae9lumo3mdr9plurn6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFr6u9UVzecQWCXUay2ZYKo4sgzFYvDKk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "426981118075-d058dv0c6is4drae9lumo3mdr9plurn6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
