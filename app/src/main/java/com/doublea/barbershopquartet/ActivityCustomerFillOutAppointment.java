@@ -11,7 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
-public class activity_customer_fill_out_appointment extends AppCompatActivity {
+public class ActivityCustomerFillOutAppointment extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
