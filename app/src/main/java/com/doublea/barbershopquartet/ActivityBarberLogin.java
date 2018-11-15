@@ -1,5 +1,6 @@
 package com.doublea.barbershopquartet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,4 +17,7 @@ public class ActivityBarberLogin extends AppCompatActivity {
 
     }
 
+    public void onClickRegister(View view) {
+        startActivity(new Intent(this, ActivityBarberRegister.class));
+    }
 }

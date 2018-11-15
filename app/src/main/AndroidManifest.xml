@@ -31,7 +31,8 @@
         <activity android:name=".ActivityBarberMenu" />
         <activity android:name=".ActivityBarberSelectAppointment" />
         <activity android:name=".ActivityBarberManageAppointment" />
-        <activity android:name=".ActivityManageSchedule"></activity>
+        <activity android:name=".ActivityManageSchedule" />
+        <activity android:name=".ActivityBarberRegister"></activity>
     </application>
 
 </manifest>
