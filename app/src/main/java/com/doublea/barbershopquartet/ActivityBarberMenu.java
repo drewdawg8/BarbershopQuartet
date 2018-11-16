@@ -13,9 +13,9 @@ public class ActivityBarberMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barber_menu);
     }
-    final Button logoutBtn = findViewById(R.id.logout);
-    final Button manageBtn = findViewById(R.id.manageSchedule);
-    final Button appBtn = findViewById(R.id.selectApp);
+    private final Button logoutBtn = findViewById(R.id.logout);
+    private final Button manageBtn = findViewById(R.id.manageSchedule);
+    private final Button appBtn = findViewById(R.id.selectApp);
 
     public  void onClickLogout(View v){
 
