@@ -138,5 +138,6 @@ public class ActivityBarberRegister extends AppCompatActivity {
 
     public void onClickswitchToLogIn(View view) {
         startActivity(new Intent(this, ActivityBarberLogin.class));
+        
     }
 }
