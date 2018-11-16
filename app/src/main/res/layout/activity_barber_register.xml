@@ -50,6 +50,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textPassword"
                 android:hint="Confirm Password"
                 android:id="@+id/register_edit_text_confirm_password"
                 android:layout_marginBottom="@dimen/edit_text_bottom_margin"/>
