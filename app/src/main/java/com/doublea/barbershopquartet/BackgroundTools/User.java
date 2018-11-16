@@ -5,4 +5,10 @@ public class User {
     private String lastName;
     private String phoneNumber;
     private String email;
+    public User(String firstName, String lastName, String phoneNumber, String email){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
 }
