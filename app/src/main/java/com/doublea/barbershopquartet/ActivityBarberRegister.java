@@ -61,11 +61,17 @@ public class ActivityBarberRegister extends AppCompatActivity {
      * @param view
      */
     public void onClickRegister(View view) {
+        if (!validInputs())
+            return;
         Barber barber = new Barber(firstName.getText().toString(), lastName.getText().toString(),
                 phoneNumber.getText().toString(), email.getText().toString(),
                 description.getText().toString());
     }
 
-    public void onClickLogIn(View view) {
+    private boolean validInputs() {
+
+    }
+
+    public void onClickswitchToLogIn(View view) {
     }
 }
