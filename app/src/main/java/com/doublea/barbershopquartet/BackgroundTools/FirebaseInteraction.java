@@ -63,4 +63,8 @@ public class FirebaseInteraction {
         DatabaseReference currentPath = database.getReference(path);
         currentPath.setValue(value);
     }
+    public void write(String path, Object value){
+        DatabaseReference currentPath = database.getReference(path);
+        currentPath.setValue(value);
+    }
 }
