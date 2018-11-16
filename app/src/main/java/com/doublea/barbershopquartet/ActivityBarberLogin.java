@@ -17,7 +17,11 @@ public class ActivityBarberLogin extends AppCompatActivity {
 
     }
 
-    public void onClickRegister(View view) {
+    public void onClickSwitchToRegister(View view) {
         startActivity(new Intent(this, ActivityBarberRegister.class));
+    }
+
+    public void onClickLogin(View view) {
+
     }
 }
