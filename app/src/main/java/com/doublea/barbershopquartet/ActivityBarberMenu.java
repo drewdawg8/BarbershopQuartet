@@ -1,5 +1,6 @@
 package com.doublea.barbershopquartet;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,10 +22,11 @@ public class ActivityBarberMenu extends AppCompatActivity {
     }
 
     public void onClickManageSchedule(View v){
-
+        startActivity(new Intent(ActivityBarberMenu.this, ActivityManageSchedule.class));
     }
 
     public void onClickSelectAppointments(View v){
+        startActivity(new Intent(ActivityBarberMenu.this, ActivityBarberSelectAppointment.class));
 
     }
 }
