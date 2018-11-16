@@ -69,7 +69,7 @@ public class ActivityBarberRegister extends AppCompatActivity {
     }
 
     private boolean validInputs() {
-
+        return false;
     }
 
     public void onClickswitchToLogIn(View view) {
