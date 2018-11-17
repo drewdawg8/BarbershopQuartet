@@ -6,7 +6,6 @@ public class Barber extends User {
     private String description;
     private ArrayList<TimeSlot> schedule;
     private FirebaseInteraction firebaseInteraction;
-
     /**
      * Constructor to create Barber object, holding barber information
      * @param firstName String for Barber first name

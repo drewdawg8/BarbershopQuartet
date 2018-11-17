@@ -67,4 +67,25 @@ public class FirebaseInteraction {
         DatabaseReference currentPath = database.getReference(path);
         currentPath.setValue(value);
     }
+
+    /**
+     * Currently supports:
+     *
+     * @param value object to be written
+     */
+    public void smartWrite(Object value){
+        DatabaseReference mainReference;
+
+        //Find object type
+        if (value.getClass() == Barber.class){
+            Barber temp = (Barber) value;
+        }
+        else if (value.getClass() == Barber.class){
+
+        }
+
+        else if (value.getClass() == Barber.class){
+
+        }
+    }
 }
