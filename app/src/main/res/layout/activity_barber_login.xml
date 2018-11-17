@@ -36,7 +36,7 @@
         android:layout_below="@+id/ll_capture_logins"
         android:text="Register"
         android:textColor="#0000ff"
-        android:onClick="onClickRegister"/>
+        android:onClick="onClickSwitchToRegister"/>
     <Button
         android:layout_marginTop="20dp"
         android:text="LogIn"
