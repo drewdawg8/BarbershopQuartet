@@ -69,7 +69,36 @@ public class ActivityBarberRegister extends AppCompatActivity {
     }
 
     private boolean validInputs() {
-        return false;
+        boolean valid = true;
+        valid = checkEmptyTextboxes();
+        valid = checkPasswordMatch();
+        return valid;
+    }
+
+    private boolean checkPasswordMatch() {
+        if (password.getText().toString().equals(confirmPassWord.getText().toString()))
+            return true;
+        else
+            return false;
+    }
+
+    private boolean checkEmptyTextboxes() {
+        boolean valid = true;
+        valid = checkEmptyEditText(firstName);
+        valid = checkEmptyEditText(lastName);
+        valid = checkEmptyEditText(phoneNumber);
+        valid = checkEmptyEditText(email);
+        valid = checkEmptyEditText(password);
+        valid = checkEmptyEditText(confirmPassWord);
+        valid = checkEmptyEditText(description);
+        return  valid;
+    }
+    private boolean checkEmptyEditText(EditText element){
+        if (element.getText().toString() == ""){
+            element.setBackgroundResource(R.drawable.background_error_txt_box);
+            return false;
+        }
+        return true;
     }
 
     public void onClickswitchToLogIn(View view) {
