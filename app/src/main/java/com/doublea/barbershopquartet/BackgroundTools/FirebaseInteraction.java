@@ -70,22 +70,19 @@ public class FirebaseInteraction {
 
     /**
      * Currently supports:
-     *
+     * Barbers
      * @param value object to be written
      */
-    public void smartWrite(Object value){
-        DatabaseReference mainReference;
+    public void writeBarber(Barber value){
+        String path = "Barbers/" + value.getUid();
+        write(path, value);
+    }
 
-        //Find object type
-        if (value.getClass() == Barber.class){
-            Barber temp = (Barber) value;
-        }
-        else if (value.getClass() == Barber.class){
-
-        }
-
-        else if (value.getClass() == Barber.class){
-
-        }
+    /**
+     * @TODO implement time slot map function
+     * @param timeSlot
+     */
+    public void writeTimeslot(TimeSlot timeSlot, Barber barber){
+        //String path = "Barbers/" + barber.getUid() + "/" + timeSlot.getMonth() + "/" + timeSlot.getDay() + "/" + timeSlot.map();
     }
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Barber extends User {
     private String description;
+    private String uid;
     private ArrayList<TimeSlot> schedule;
     private FirebaseInteraction firebaseInteraction;
     /**
@@ -18,9 +19,28 @@ public class Barber extends User {
         super(firstName, lastName, phoneNumber, email);
         this.description = description;
     }
-
+    public Barber(String firstName, String lastName, String phoneNumber, String email, String description, String uid){
+        super(firstName, lastName, phoneNumber, email);
+        this.description = description;
+        this.uid = uid;
+    }
     public void removeAppointment(Appointment appointment, TimeSlot timeSlot){
 
+    }
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void addAppointment(Appointment appointment){

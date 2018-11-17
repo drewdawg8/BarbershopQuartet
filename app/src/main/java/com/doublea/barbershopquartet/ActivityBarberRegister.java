@@ -35,7 +35,7 @@ public class ActivityBarberRegister extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barber_register);
         initializeVariables();
-        //testInputs();
+        testInputs();
     }
 
     private void testInputs() {
@@ -90,8 +90,8 @@ public class ActivityBarberRegister extends AppCompatActivity {
     private void updateUI(String uid) {
         Barber barber = new Barber(firstName.getText().toString(), lastName.getText().toString(),
                 phoneNumber.getText().toString(), email.getText().toString(),
-                description.getText().toString());
-        firebase.write("Barbers/" + uid, barber);
+                description.getText().toString(), uid);
+        firebase.smartWrite(barber);
         startActivity(new Intent(ActivityBarberRegister.this, ActivityBarberMenu.class));
     }
 
