@@ -6,6 +6,8 @@ public class TimeSlot {
     private String hour;
     private String minute;
     private Appointment appointment;
+    private boolean booked;
+    private boolean unavailable;
     /**
      * Creates a TimeSlot object with appointment information and time and date of appointment
      * @param month Month in which appointment will occur
@@ -20,6 +22,9 @@ public class TimeSlot {
         this.hour = hour;
         this.minute = minute;
         this.appointment = appointment;
+        /* two variables to determine the availability of the TimeSlot */
+        this.booked = false;
+        this.unavailable = false;
     }
 
     /**
@@ -59,5 +64,38 @@ public class TimeSlot {
      */
     public String toString(){
         return this.getMonth() + ":" + this.getDay() + ":" + this.getHour() + ":" + this.getMinute();
+    }
+
+    /**
+     * Method to return status of TimeSlot, if its currently booked or not
+     * @return boolean True if TimeSlot is booked, false if not.
+     */
+    public boolean isBooked() {
+         return this.booked;
+    }
+
+    /**
+     * Method to return status of TimeSlot, if its available or unavailable.
+     * @return boolean true if TimeSlot is unavailable, false if TimeSlot is
+     * unavailable
+     */
+    public boolean isUnavailable() {
+        return unavailable;
+    }
+
+    /**
+     * Method to set the status of the TimeSlot whether its booked or not.
+     * @param booked boolean to set value of boolean booked
+     */
+    public void setBooked(boolean booked) {
+        this.booked = booked;
+    }
+
+    /**
+     * Method to set availability of TimeSlot if its available or not
+     * @param unavailable boolean to set availability of TimeSlot
+     */
+    public void setUnavailable(boolean unavailable) {
+        this.unavailable = unavailable;
     }
 }
