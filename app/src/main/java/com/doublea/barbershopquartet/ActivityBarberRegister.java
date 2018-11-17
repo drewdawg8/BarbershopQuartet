@@ -35,21 +35,17 @@ public class ActivityBarberRegister extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barber_register);
         initializeVariables();
-        Toast.makeText(ActivityBarberRegister.this, "Authentication failed.",
-                Toast.LENGTH_SHORT).show();
-        firebase.read("Barbers/first name/firstName", new FirebaseReadListener(){
+        //testInputs();
+    }
 
-            @Override
-            public void onSuccess(DataSnapshot data) {
-                Toast.makeText(ActivityBarberRegister.this, data.getValue().toString(),
-                        Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure() {
-
-            }
-        });
+    private void testInputs() {
+        firstName.setText("Zach");
+        lastName.setText("parn");
+        phoneNumber.setText("12345");
+        email.setText("zach@gmail.com");
+        password.setText("123wdasdsa");
+        confirmPassWord.setText("123wdasdsa");
+        description.setText("I will shave you like my goat");
     }
 
     private void initializeVariables() {
@@ -65,9 +61,6 @@ public class ActivityBarberRegister extends AppCompatActivity {
     }
 
     /**
-     * @TODO Authenticate user and wire up to firebase authentication service
-     * @TODO Authenticate valid input
-     *
      * @param view
      */
     public void onClickRegister(View view) {
@@ -99,14 +92,13 @@ public class ActivityBarberRegister extends AppCompatActivity {
                 phoneNumber.getText().toString(), email.getText().toString(),
                 description.getText().toString());
         firebase.write("Barbers/" + uid, barber);
-        startActivity(new Intent(this, ActivityBarberMenu.class));
-
+        startActivity(new Intent(ActivityBarberRegister.this, ActivityBarberMenu.class));
     }
 
     private boolean validInputs() {
         boolean valid = true;
-        valid = checkEmptyTextboxes();
-        valid = checkPasswordMatch();
+        if (!checkEmptyTextboxes()) valid = false;
+        if (!checkPasswordMatch()) valid = false;
         return valid;
     }
 
@@ -119,17 +111,17 @@ public class ActivityBarberRegister extends AppCompatActivity {
 
     private boolean checkEmptyTextboxes() {
         boolean valid = true;
-        valid = checkEmptyEditText(firstName);
-        valid = checkEmptyEditText(lastName);
-        valid = checkEmptyEditText(phoneNumber);
-        valid = checkEmptyEditText(email);
-        valid = checkEmptyEditText(password);
-        valid = checkEmptyEditText(confirmPassWord);
-        valid = checkEmptyEditText(description);
-        return  valid;
+        if (!checkEmptyEditText(firstName)) valid = false;
+        if (!checkEmptyEditText(lastName)) valid =  false;
+        if (!checkEmptyEditText(phoneNumber)) valid = false;
+        if (!checkEmptyEditText(email)) valid = false;
+        if (!checkEmptyEditText(password)) valid = false;
+        if (!checkEmptyEditText(confirmPassWord)) valid = false;
+        if (!checkEmptyEditText(description)) valid =  false;
+        return valid;
     }
     private boolean checkEmptyEditText(EditText element){
-        if (element.getText().toString() == ""){
+        if (element.getText().toString().equals("")){
             element.setBackgroundResource(R.drawable.background_error_txt_box);
             return false;
         }

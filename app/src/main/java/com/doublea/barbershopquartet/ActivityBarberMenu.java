@@ -8,14 +8,23 @@ import android.widget.Button;
 
 public class ActivityBarberMenu extends AppCompatActivity {
 
+    private Button logoutBtn;
+    private Button manageBtn;
+    private Button appBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barber_menu);
+        initializeVarbles();
     }
-    private final Button logoutBtn = findViewById(R.id.logout);
-    private final Button manageBtn = findViewById(R.id.manageSchedule);
-    private final Button appBtn = findViewById(R.id.selectApp);
+
+    private void initializeVarbles() {
+        logoutBtn = findViewById(R.id.logout);
+        manageBtn = findViewById(R.id.manageSchedule);
+        appBtn = findViewById(R.id.selectApp);
+    }
+
+
 
     public  void onClickLogout(View v){
 
