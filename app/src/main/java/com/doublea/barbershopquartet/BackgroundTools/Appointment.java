@@ -6,8 +6,10 @@ public class Appointment {
     private Customer customer;
 
     /**
-     * Appointment constructor to create appointment object
-     *
+     * Constructor to create an Appointment object
+     * @param notes contains notes from customer to barber
+     * @param url holds url for the image the customer is trying to send to barber
+     * @param customer hold the customer information, firstName, lastName, phoneNumber, email
      */
     public Appointment(String notes, String url, Customer customer){
         this.notes = notes;
@@ -16,7 +18,7 @@ public class Appointment {
     }
 
     /**
-     * Method to get the notes from user
+     * Method to get the notes from customer
      * @return String containing user notes
      */
     public String getNotes(){
