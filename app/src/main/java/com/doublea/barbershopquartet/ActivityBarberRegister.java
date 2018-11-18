@@ -91,7 +91,7 @@ public class ActivityBarberRegister extends AppCompatActivity {
         Barber barber = new Barber(firstName.getText().toString(), lastName.getText().toString(),
                 phoneNumber.getText().toString(), email.getText().toString(),
                 description.getText().toString(), uid);
-        firebase.smartWrite(barber);
+        firebase.writeBarber(barber);
         startActivity(new Intent(ActivityBarberRegister.this, ActivityBarberMenu.class));
     }
 
