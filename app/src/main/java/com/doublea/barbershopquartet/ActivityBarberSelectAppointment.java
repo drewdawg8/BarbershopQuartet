@@ -10,4 +10,6 @@ public class ActivityBarberSelectAppointment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barber_select_appointment);
     }
+
+
 }

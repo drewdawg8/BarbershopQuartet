@@ -28,6 +28,57 @@ public class TimeSlot {
     }
 
     /**
+     * Method to set minute
+     * @param minute String minute
+     */
+    public void setMinute(String minute) {
+        this.minute = minute;
+    }
+
+    /**
+     * Method to set hour
+     * @param hour String hour
+     */
+    public void setHour(String hour) {
+        this.hour = hour;
+    }
+
+    /**
+     * Method to set Appointment into TimeSlot
+     * @param appointment Appointment
+     */
+    public void setAppointment(Appointment appointment) {
+
+        this.appointment = appointment;
+    }
+
+    /**
+     * Method to get an Appointment in the TimeSlot
+     * @return Appointment appointment of customer
+     */
+    public Appointment getAppointment() {
+
+        return appointment;
+    }
+
+    /**
+     * Method to set the day of the TimeSlot
+     * @param day String day of the appointment
+     */
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    /**
+     * Method to set the Month of the TimeSlot
+     * @param month String month
+     */
+    public void setMonth(String month) {
+
+        this.month = month;
+    }
+
+    /**
      * Returns the month of the appointment
      * @return String containing month
      */
@@ -42,6 +93,7 @@ public class TimeSlot {
     public String getDay(){
         return this.day;
     }
+
     /**
      * Gets the hour that the appointment will occur
      * @return String containing hour
@@ -51,7 +103,7 @@ public class TimeSlot {
     }
 
     /**
-     * Get minutes in which appointment will occure
+     * Get minutes that the appointment will occur
      * @return String containing minutes
      */
     public String getMinute() {
