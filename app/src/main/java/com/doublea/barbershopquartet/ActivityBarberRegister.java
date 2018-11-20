@@ -35,16 +35,16 @@ public class ActivityBarberRegister extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barber_register);
         initializeVariables();
-        //testInputs();
+        testInputs();
     }
 
     private void testInputs() {
         firstName.setText("Zach");
-        lastName.setText("parn");
-        phoneNumber.setText("12345");
-        email.setText("zach@gmail.com");
-        password.setText("123wdasdsa");
-        confirmPassWord.setText("123wdasdsa");
+        lastName.setText("Parn");
+        phoneNumber.setText("7037636929");
+        email.setText("zachary.parn@gmail.com");
+        password.setText("asdf");
+        confirmPassWord.setText("asdf");
         description.setText("I will shave you like my goat");
     }
 

@@ -43,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:hint="E-mail"
                 android:id="@+id/register_edit_text_email"
+                android:inputType=""
                 android:background="@drawable/background_txt_box"
                 android:layout_marginBottom="@dimen/edit_text_bottom_margin"/>
             <EditText

@@ -2,11 +2,13 @@ package com.doublea.barbershopquartet;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -45,19 +47,21 @@ public class ActivityManageSchedule extends AppCompatActivity implements Adapter
                 findViewById(R.id.radio_timeslot15)};
 
         for (RadioButton rb : radioButtons) rb.setEnabled(false);
-
+        spinnerDay.setEnabled(false);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.months, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMonth.setAdapter(adapter);
         spinnerMonth.setOnItemSelectedListener(this);
 
-        spinnerDay.setEnabled(false);
+
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-        switch(view.getId()) {
+        //Toast.makeText(ActivityManageSchedule.this, "View ID:" + I,Toast.LENGTH_SHORT).show();
+//        Log.d("output", "View ID:" + Integer.toString(adapterView.getId()));
+//        Log.d("output", "Month ID:" + Integer.toString(R.id.spinner_month));
+        switch(adapterView.getId()) {
             case R.id.spinner_month:
                 populateSpinnerDay(getDaysInMonth(i));
                 break;
@@ -93,7 +97,7 @@ public class ActivityManageSchedule extends AppCompatActivity implements Adapter
 
     private void populateSpinnerDay(int daysInMonth) {
         List<String> days = new ArrayList<>();
-        for (int i = 0; i < daysInMonth; i++)
+        for (int i = 1; i <= daysInMonth; i++)
             days.add(Integer.toString(i));
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, days);
