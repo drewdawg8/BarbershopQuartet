@@ -27,7 +27,7 @@ public class ActivityBarberMenu extends AppCompatActivity {
 
 
     public  void onClickLogout(View v){
-
+        startActivity(new Intent(ActivityBarberMenu.this, ActivityMain.class));
     }
 
     public void onClickManageSchedule(View v){
