@@ -150,4 +150,12 @@ public class TimeSlot {
     public void setUnavailable(boolean unavailable) {
         this.unavailable = unavailable;
     }
+
+    /**
+     * @TODO Return an integer ranging from 0 to 15 based on hour and minute of appointment time.
+     * @return
+     */
+    public int map() {
+        return 0;
+    }
 }
