@@ -29,6 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
+            android:inputType="textPassword"
             android:layout_marginBottom="@dimen/edit_text_bottom_margin"/>
     </LinearLayout>
     <TextView

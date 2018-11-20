@@ -21,24 +21,29 @@
                 android:layout_height="wrap_content"
                 android:hint="First Name"
                 android:id="@+id/register_edit_text_first_name"
+                android:background="@drawable/background_txt_box"
                 android:layout_marginBottom="@dimen/edit_text_bottom_margin"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Last Name"
                 android:id="@+id/register_edit_text_last_name"
+                android:background="@drawable/background_txt_box"
                 android:layout_marginBottom="@dimen/edit_text_bottom_margin"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Phone Number"
                 android:id="@+id/register_edit_text_phone_number"
+                android:inputType="phone"
+                android:background="@drawable/background_txt_box"
                 android:layout_marginBottom="@dimen/edit_text_bottom_margin"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="E-mail"
                 android:id="@+id/register_edit_text_email"
+                android:background="@drawable/background_txt_box"
                 android:layout_marginBottom="@dimen/edit_text_bottom_margin"/>
             <EditText
                 android:layout_width="match_parent"
@@ -46,6 +51,7 @@
                 android:inputType="textPassword"
                 android:hint="Password"
                 android:id="@+id/register_edit_text_password"
+                android:background="@drawable/background_txt_box"
                 android:layout_marginBottom="@dimen/edit_text_bottom_margin"/>
             <EditText
                 android:layout_width="match_parent"
@@ -53,6 +59,7 @@
                 android:inputType="textPassword"
                 android:hint="Confirm Password"
                 android:id="@+id/register_edit_text_confirm_password"
+                android:background="@drawable/background_txt_box"
                 android:layout_marginBottom="@dimen/edit_text_bottom_margin"/>
             <TextView
                 android:layout_width="match_parent"

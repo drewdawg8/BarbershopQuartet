@@ -35,7 +35,7 @@ public class ActivityBarberRegister extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barber_register);
         initializeVariables();
-        testInputs();
+        //testInputs();
     }
 
     private void testInputs() {
@@ -80,6 +80,7 @@ public class ActivityBarberRegister extends AppCompatActivity {
                             updateUI(user.getUid());
                         } else {
                             // If sign in fails, display a message to the user.
+                            Toast.makeText(ActivityBarberRegister.this, "Sign up failed", Toast.LENGTH_SHORT).show();
                         }
 
                         // ...
@@ -106,6 +107,7 @@ public class ActivityBarberRegister extends AppCompatActivity {
         if (password.getText().toString().equals(confirmPassWord.getText().toString()))
             return true;
         else
+            Toast.makeText(ActivityBarberRegister.this, "Passwords don't match", Toast.LENGTH_SHORT).show();
             return false;
     }
 
@@ -125,6 +127,7 @@ public class ActivityBarberRegister extends AppCompatActivity {
             element.setBackgroundResource(R.drawable.background_error_txt_box);
             return false;
         }
+        element.setBackgroundResource(R.drawable.background_txt_box);
         return true;
     }
 
