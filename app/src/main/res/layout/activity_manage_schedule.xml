@@ -9,25 +9,17 @@
         android:orientation="vertical"
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
-        <TextView
+        <Button
+            android:id="@+id/schedule_button_select_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select month:"
-            android:textSize="@dimen/text_size"/>
-        <Spinner
-            android:id="@+id/spinner_month"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </Spinner>
-        <TextView
+            android:text="Select Date"
+            android:onClick="onClickSelectDate"/>
+        <EditText
+            android:id="@+id/schedule_edit_text_display_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select day:"
-            android:textSize="@dimen/text_size"/>
-        <Spinner
-            android:id="@+id/spinner_day"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></Spinner>
+            android:enabled="false"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -166,11 +158,11 @@
         </LinearLayout>
     </LinearLayout>
     <Button
-        android:id="@+id/button_submit"
+        android:id="@+id/schedule_button_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Submit Changes"
         android:layout_alignParentBottom="true"
         android:onClick="onClickSubmit"
-        />
+        android:enabled="false"/>
 </RelativeLayout>

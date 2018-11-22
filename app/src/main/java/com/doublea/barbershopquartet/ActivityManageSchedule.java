@@ -1,32 +1,32 @@
 package com.doublea.barbershopquartet;
 
+import android.app.DatePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.Spinner;
-import android.widget.Toast;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
+import com.doublea.barbershopquartet.BackgroundTools.FirebaseInteraction;
+import com.doublea.barbershopquartet.BackgroundTools.TimeSlot;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class ActivityManageSchedule extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
-    private Spinner spinnerMonth;
-    private Spinner spinnerDay;
+public class ActivityManageSchedule extends AppCompatActivity{
+
     private RadioButton[] radioButtons;
+    private FirebaseInteraction firebase;
+    private Calendar scheduleDate; // date to edit
+    private TimeSlot[] timeSlots;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_schedule);
-
-        spinnerMonth = findViewById(R.id.spinner_month);
-        spinnerDay = findViewById(R.id.spinner_day);
 
         radioButtons = new RadioButton[]{
                 findViewById(R.id.radio_timeslot0),
@@ -47,131 +47,113 @@ public class ActivityManageSchedule extends AppCompatActivity implements Adapter
                 findViewById(R.id.radio_timeslot15)};
 
         for (RadioButton rb : radioButtons) rb.setEnabled(false);
-        spinnerDay.setEnabled(false);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.months, android.R.layout.simple_spinner_dropdown_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerMonth.setAdapter(adapter);
-        spinnerMonth.setOnItemSelectedListener(this);
 
-
+        firebase = new FirebaseInteraction();
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        //Toast.makeText(ActivityManageSchedule.this, "View ID:" + I,Toast.LENGTH_SHORT).show();
-//        Log.d("output", "View ID:" + Integer.toString(adapterView.getId()));
-//        Log.d("output", "Month ID:" + Integer.toString(R.id.spinner_month));
-        switch(adapterView.getId()) {
-            case R.id.spinner_month:
-                populateSpinnerDay(getDaysInMonth(i));
-                break;
-            case R.id.spinner_day:
-                populateRadioButtons(spinnerMonth.getSelectedItem().toString(), i + 1);
-                break;
-        }
+    public void onClickSelectDate(View view) {
+
+        int initYear = Calendar.getInstance().get(Calendar.YEAR);
+        int initMonth = Calendar.getInstance().get(Calendar.MONTH);
+        int initDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(view.getContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int y, int m, int d) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(y, m, d);
+                EditText e = findViewById(R.id.schedule_edit_text_display_date);
+                SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM dd");
+                e.setText(sdf.format(calendar.getTime()));
+                scheduleDate = calendar;
+                populateRadioButtons();
+            }
+        }, initYear, initMonth, initDay);
+
+        datePickerDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
+
+        Calendar maxDate = Calendar.getInstance();
+        maxDate.set(Calendar.YEAR, 2018);
+        maxDate.set(Calendar.MONTH, 12);
+        maxDate.set(Calendar.DAY_OF_MONTH, 31);
+        datePickerDialog.getDatePicker().setMaxDate(maxDate.getTimeInMillis());
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
-    }
-
-    private int getDaysInMonth(int month) {
-        int days = 0;
-        switch(month) {
-            case 0:  days = 31; break; // Jan
-            case 1:  days = 28; break; // Feb
-            case 2:  days = 31; break; // Mar
-            case 3:  days = 30; break; // Apr
-            case 4:  days = 31; break; // May
-            case 5:  days = 30; break; // Jun
-            case 6:  days = 31; break; // Jul
-            case 7:  days = 31; break; // Aug
-            case 8:  days = 30; break; // Sep
-            case 9:  days = 31; break; // Oct
-            case 10: days = 30; break; // Nov
-            case 11: days = 31; break; // Dec
-        }
-        return days;
-    }
-
-    private void populateSpinnerDay(int daysInMonth) {
-        List<String> days = new ArrayList<>();
-        for (int i = 1; i <= daysInMonth; i++)
-            days.add(Integer.toString(i));
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, days);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerDay.setAdapter(adapter);
-        spinnerDay.setEnabled(true);
-    }
-
-    private void populateRadioButtons(String month, int date) {
+    private void populateRadioButtons() {
         for (RadioButton rb : radioButtons) rb.setEnabled(true);
-        // TODO load time slot data for given date and automatically check radio buttons
+
+        String month = Integer.toString(scheduleDate.get(Calendar.MONTH));
+        String day = Integer.toString(scheduleDate.get(Calendar.DAY_OF_MONTH));
+
+        // TODO read time slots from database
+
+        findViewById(R.id.schedule_button_submit).setEnabled(true);
     }
 
     public void onClickRadioButton(View view) {
         boolean checked = ((RadioButton) view).isChecked();
+        TimeSlot timeSlot;
 
         switch(view.getId()) {
             case R.id.radio_timeslot0:
-                // TODO update time slot availability when radio buttons are checked/unchecked
-                if (checked) {
-                    // mark time slot as available
-                } else {
-                    // mark time slot as unavailable
-                }
+                timeSlot = timeSlots[0];
                 break;
             case R.id.radio_timeslot1:
-
+                timeSlot = timeSlots[1];
                 break;
             case R.id.radio_timeslot2:
-
+                timeSlot = timeSlots[2];
                 break;
             case R.id.radio_timeslot3:
-
+                timeSlot = timeSlots[3];
                 break;
             case R.id.radio_timeslot4:
-
+                timeSlot = timeSlots[4];
                 break;
             case R.id.radio_timeslot5:
-
+                timeSlot = timeSlots[5];
                 break;
             case R.id.radio_timeslot6:
-
+                timeSlot = timeSlots[6];
                 break;
             case R.id.radio_timeslot7:
-
+                timeSlot = timeSlots[7];
                 break;
             case R.id.radio_timeslot8:
-
+                timeSlot = timeSlots[8];
                 break;
             case R.id.radio_timeslot9:
-
+                timeSlot = timeSlots[9];
                 break;
             case R.id.radio_timeslot10:
-
+                timeSlot = timeSlots[10];
                 break;
             case R.id.radio_timeslot11:
-
+                timeSlot = timeSlots[11];
                 break;
             case R.id.radio_timeslot12:
-
+                timeSlot = timeSlots[12];
                 break;
             case R.id.radio_timeslot13:
-
+                timeSlot = timeSlots[13];
                 break;
             case R.id.radio_timeslot14:
-
+                timeSlot = timeSlots[14];
                 break;
-            case R.id.radio_timeslot15:
-
+            default:
+                timeSlot = timeSlots[15];
                 break;
+        }
+
+        if (checked) {
+            timeSlot.setUnavailable(false);
+        } else {
+            timeSlot.setUnavailable(true);
         }
     }
 
     public void onClickSubmit(View view) {
-        // TODO submit changes to database
+        // TODO write timeSlots array to database; check if booked appointments need to be removed?
+
+        this.recreate(); // relaunch the activity to select another date
     }
 }
