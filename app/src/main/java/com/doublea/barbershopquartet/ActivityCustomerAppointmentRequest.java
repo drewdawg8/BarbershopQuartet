@@ -1,11 +1,14 @@
 package com.doublea.barbershopquartet;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -14,7 +17,9 @@ import com.doublea.barbershopquartet.BackgroundTools.FirebaseInteraction;
 import com.doublea.barbershopquartet.BackgroundTools.FirebaseReadListener;
 import com.google.firebase.database.DataSnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
 
@@ -86,7 +91,7 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
                 this.stages++;
                 getSelectedBarber();
                 this.textView.setText("Choose a Date:");
-                getDate();
+                getDate(view);
                 break;
             case 1:
                 this.stages++;
@@ -114,8 +119,45 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
 
     }
 
-    private void getDate() {
+    private void getDate(View view) {
+        int initYear = Calendar.getInstance().get(Calendar.YEAR);
+        int initMonth = Calendar.getInstance().get(Calendar.MONTH);
+        int initDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(view.getContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int y, int m, int d) {
+                populateSpinnerTimeSlots(m, d);
 
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(y, m, d);
+
+
+            }
+        }, initYear, initMonth, initDay);
+
+        datePickerDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
+
+        Calendar maxDate = Calendar.getInstance();
+        maxDate.set(Calendar.YEAR, 2018);
+        maxDate.set(Calendar.MONTH, 11);
+        maxDate.set(Calendar.DAY_OF_MONTH, 31);
+        datePickerDialog.getDatePicker().setMaxDate(maxDate.getTimeInMillis());
+        datePickerDialog.show();
+    }
+
+    private void populateSpinnerTimeSlots(int m, int d) {
+        String path = "Barbers/" + barber.getUid() + "/" + m + "/" + d;
+        firebaseInteraction.read(path, new FirebaseReadListener() {
+            @Override
+            public void onSuccess(DataSnapshot data) {
+                
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
     }
 
 
