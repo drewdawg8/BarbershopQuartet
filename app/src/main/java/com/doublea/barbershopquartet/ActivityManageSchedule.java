@@ -73,7 +73,7 @@ public class ActivityManageSchedule extends AppCompatActivity{
 
         Calendar maxDate = Calendar.getInstance();
         maxDate.set(Calendar.YEAR, 2018);
-        maxDate.set(Calendar.MONTH, 12);
+        maxDate.set(Calendar.MONTH, 11);
         maxDate.set(Calendar.DAY_OF_MONTH, 31);
         datePickerDialog.getDatePicker().setMaxDate(maxDate.getTimeInMillis());
         datePickerDialog.show();
