@@ -38,6 +38,10 @@ public class ActivityBarberLogin extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
     }
     @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, ActivityMain.class));
+    }
+    @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.

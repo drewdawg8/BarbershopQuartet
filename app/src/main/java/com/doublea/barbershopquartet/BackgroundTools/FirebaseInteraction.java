@@ -86,4 +86,9 @@ public class FirebaseInteraction {
                 timeSlot.map();
         write(path, timeSlot);
     }
+    public void writeTimeslot(TimeSlot timeSlot, String barberUid){
+        String path = "Barbers/" + barberUid + "/" + timeSlot.getMonth() + "/" + timeSlot.getDay() + "/" +
+                timeSlot.map();
+        write(path, timeSlot);
+    }
 }
