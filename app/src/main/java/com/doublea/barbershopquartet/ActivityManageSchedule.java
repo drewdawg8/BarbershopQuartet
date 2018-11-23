@@ -8,9 +8,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import com.doublea.barbershopquartet.BackgroundTools.Appointment;
+import com.doublea.barbershopquartet.BackgroundTools.Barber;
 import com.doublea.barbershopquartet.BackgroundTools.FirebaseInteraction;
+import com.doublea.barbershopquartet.BackgroundTools.FirebaseReadListener;
 import com.doublea.barbershopquartet.BackgroundTools.TimeSlot;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -82,10 +86,35 @@ public class ActivityManageSchedule extends AppCompatActivity{
     private void populateRadioButtons() {
         for (RadioButton rb : radioButtons) rb.setEnabled(true);
 
-        String month = Integer.toString(scheduleDate.get(Calendar.MONTH));
+        String month = Integer.toString(scheduleDate.get(Calendar.MONTH)) + 1;
         String day = Integer.toString(scheduleDate.get(Calendar.DAY_OF_MONTH));
 
-        // TODO read time slots from database
+        Barber barber = ActivityBarberLogin.barber;
+        String UID = barber.getUid();
+        String path = "Barbers/" + UID + "/" + month + "/" + day;
+        firebase.read(path, new FirebaseReadListener() {
+            @Override
+            public void onSuccess(DataSnapshot data) {
+                for (DataSnapshot d: data.getChildren()){
+                    int i = Integer.parseInt(d.getKey());
+                    Appointment app = d.child("appointment").getValue(Appointment.class);
+                    TimeSlot timeSlot = new TimeSlot(d.child("month").getValue().toString(), d.child("day").getValue().toString(),
+                            d.child("hour").getValue().toString(), d.child("minute").getValue().toString(), app);
+
+                    timeSlot.setBooked(Boolean.parseBoolean(d.child("booked").getValue().toString()));
+                    timeSlot.setUnavailable(Boolean.parseBoolean(d.child("unavailable").getValue().toString()));
+
+                    timeSlots[i] = timeSlot;
+
+                    if (!timeSlot.isUnavailable()) radioButtons[i].setChecked(true);
+                }
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
 
         findViewById(R.id.schedule_button_submit).setEnabled(true);
     }
