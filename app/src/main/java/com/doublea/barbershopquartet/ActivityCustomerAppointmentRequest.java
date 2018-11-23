@@ -14,18 +14,16 @@ import com.doublea.barbershopquartet.BackgroundTools.FirebaseInteraction;
 import com.doublea.barbershopquartet.BackgroundTools.FirebaseReadListener;
 import com.google.firebase.database.DataSnapshot;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
 
-    private Spinner firstSpinner;
-    private Spinner secondSpinner;
+    private Spinner spinner;
     private TextView textView;
     private Button button;
     private FirebaseInteraction firebaseInteraction;
     private ArrayList<Barber> listOfBarbers;
+    private ArrayList<String> barberNames;
     protected static Barber barber;
     private int stages;
     @Override
@@ -36,8 +34,7 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
     }
 
     private void intializeVariables() {
-        this.firstSpinner = (Spinner)findViewById(R.id.spinner);
-        this.secondSpinner = (Spinner)findViewById(R.id.spinner2);
+        this.spinner = (Spinner)findViewById(R.id.spinner);
         this.textView = (TextView)findViewById(R.id.text_view);
         this.button = (Button) findViewById(R.id.next_button);
         this.firebaseInteraction = new FirebaseInteraction();
@@ -65,7 +62,7 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
     }
 
     private void populateFirstSpinner() {
-        ArrayList<String> barberNames = new ArrayList<String>();
+        barberNames = new ArrayList<String>();
         for(Barber b : this.listOfBarbers){
             barberNames.add(b.getFirstName() + " " + b.getLastName());
         }
@@ -74,7 +71,7 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
                 this, android.R.layout.simple_spinner_item, barberNames);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        firstSpinner.setAdapter(adapter);
+        spinner.setAdapter(adapter);
     }
 
     private Barber extractBarber(DataSnapshot barber) {
@@ -87,12 +84,13 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
         switch(stages){
             case 0:
                 this.stages++;
+                getSelectedBarber();
                 this.textView.setText("Choose a Date:");
                 getDate();
                 break;
             case 1:
                 this.stages++;
-                this.textView.setText("Choose a Time Slot for your appointment");
+                this.textView.setText("Choose a Time Slot for your Appointment");
                 getTimeSlot();
                 button.setText("Submit");
                 break;
@@ -101,12 +99,23 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
         }
     }
 
+    private void loadTimeSlots() {
+
+    }
+
+    private void getSelectedBarber() {
+        String name = spinner.getSelectedItem().toString();
+        int index = barberNames.indexOf(name);
+        barber = listOfBarbers.get(index);
+    }
+
     private void getTimeSlot() {
+        String timeSlot = spinner.getSelectedItem().toString();
 
     }
 
     private void getDate() {
-        
+
     }
 
 
