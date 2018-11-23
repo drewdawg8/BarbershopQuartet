@@ -76,6 +76,7 @@ public class ActivityManageSchedule extends AppCompatActivity{
         maxDate.set(Calendar.MONTH, 12);
         maxDate.set(Calendar.DAY_OF_MONTH, 31);
         datePickerDialog.getDatePicker().setMaxDate(maxDate.getTimeInMillis());
+        datePickerDialog.show();
     }
 
     private void populateRadioButtons() {
