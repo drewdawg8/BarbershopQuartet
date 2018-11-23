@@ -111,7 +111,7 @@ public class ActivityBarberRegister extends AppCompatActivity {
         String minute;
         for (int i = 1; i < 13; i++){
             month = Integer.toString(i);
-            calendar.set(Calendar.MONTH, i);
+            calendar.set(Calendar.MONTH, i - 1);
             for (int j = 1; j < calendar.getActualMaximum(Calendar.DAY_OF_MONTH) + 1; j++){
                 day = Integer.toString(j);
                 for (double h = 9; h < 17; h += 0.5){

@@ -155,8 +155,9 @@ public class TimeSlot {
      * Converts hour and minutes to single integer
      */
     public int map() {
-        float result;
-        float hours = Integer.parseInt(hour);
-        return ((Integer.parseInt(hour) + (Integer.parseInt(minute) / 60 ) - 9)) * 2;
+        float hours = Float.parseFloat(hour);
+        float minutes = Float.parseFloat(minute) / 60;
+        float result = (hours + minutes - 9) * 2;
+        return (int)result;
     }
 }
