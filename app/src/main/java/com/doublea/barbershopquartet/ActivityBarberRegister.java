@@ -12,12 +12,17 @@ import android.widget.Toast;
 import com.doublea.barbershopquartet.BackgroundTools.Barber;
 import com.doublea.barbershopquartet.BackgroundTools.FirebaseInteraction;
 import com.doublea.barbershopquartet.BackgroundTools.FirebaseReadListener;
+import com.doublea.barbershopquartet.BackgroundTools.TimeSlot;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
+
+import java.sql.Time;
+import java.time.YearMonth;
+import java.util.Calendar;
 
 public class ActivityBarberRegister extends AppCompatActivity {
     
@@ -39,12 +44,12 @@ public class ActivityBarberRegister extends AppCompatActivity {
     }
 
     private void testInputs() {
-        firstName.setText("Zach");
-        lastName.setText("Parn");
+        firstName.setText("Ahmed");
+        lastName.setText("Ali");
         phoneNumber.setText("7037636929");
-        email.setText("zachary.parn@gmail.com");
-        password.setText("asdf");
-        confirmPassWord.setText("asdf");
+        email.setText("ahmedhhw2@gmail.com");
+        password.setText("ahmedmo");
+        confirmPassWord.setText("ahmedmo");
         description.setText("I will shave you like my goat");
     }
 
@@ -93,8 +98,32 @@ public class ActivityBarberRegister extends AppCompatActivity {
                 phoneNumber.getText().toString(), email.getText().toString(),
                 description.getText().toString(), uid);
         firebase.writeBarber(barber);
+        generateTimeSlots(barber);
         startActivity(new Intent(ActivityBarberRegister.this, ActivityBarberMenu.class));
     }
+
+    private void generateTimeSlots(Barber barber) {
+        Calendar calendar = Calendar.getInstance();
+        TimeSlot timeSlot = null;
+        String month;
+        String day;
+        String hour;
+        String minute;
+        for (int i = 1; i < 13; i++){
+            month = Integer.toString(i);
+            calendar.set(Calendar.MONTH, i);
+            for (int j = 1; j < calendar.getActualMaximum(Calendar.DAY_OF_MONTH) + 1; j++){
+                day = Integer.toString(j);
+                for (double h = 9; h < 17; h += 0.5){
+                    hour = Integer.toString((int)Math.floor(h));
+                    minute = ((h - Math.floor(h)) > 0)? "30":"0";
+                    timeSlot = new TimeSlot(month,day,hour,minute,null);
+                    firebase.writeTimeslot(timeSlot,barber);
+                }
+            }
+        }
+    }
+
 
     private boolean validInputs() {
         boolean valid = true;

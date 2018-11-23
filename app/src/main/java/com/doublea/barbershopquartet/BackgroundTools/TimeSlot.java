@@ -152,10 +152,11 @@ public class TimeSlot {
     }
 
     /**
-     * @TODO Return an integer ranging from 0 to 15 based on hour and minute of appointment time.
-     * @return
+     * Converts hour and minutes to single integer
      */
     public int map() {
-        return 0;
+        float result;
+        float hours = Integer.parseInt(hour);
+        return ((Integer.parseInt(hour) + (Integer.parseInt(minute) / 60 ) - 9)) * 2;
     }
 }
