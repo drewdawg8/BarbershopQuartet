@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Spinner;
 
+import com.doublea.barbershopquartet.BackgroundTools.TimeSlot;
+
 public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
 
     @Override
@@ -19,8 +21,13 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
         Object firstSpinnerSelection = firstSpinner.getSelectedItem(); // for now until we load data to firebase
         Spinner secondSpinner = (Spinner)findViewById(R.id.spinner2);
         Object secondSpinnerSelection = secondSpinner.getSelectedItem(); // for now until we load data to firebase
+
+        String barber = firstSpinnerSelection.toString();
+        String timeSlot = secondSpinnerSelection.toString();
         //if(firstSpinnerSelection != null || secondSpinnerSelection != null){
             Intent startNewActivity = new Intent(this, ActivityCustomerFillOutAppointment.class);
+            startNewActivity.putExtra("timeSlot", timeSlot);
+            startNewActivity.putExtra("barber", barber);
             startActivity(startNewActivity);
        // }
 

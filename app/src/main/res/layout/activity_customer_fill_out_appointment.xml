@@ -66,6 +66,5 @@
         android:layout_height="wrap_content"
         android:text="Reserve Appointment"
         android:layout_alignParentBottom="true"
-        android:onClick="onClickReserveAppointment"
-        />
+        android:onClick="onClickReserveAppointment"/>
 </RelativeLayout>
