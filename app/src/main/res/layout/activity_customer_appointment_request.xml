@@ -7,36 +7,25 @@
     android:paddingRight="16dp">
 
     <Spinner
-        android:id="@+id/spinner1"
+        android:id="@+id/spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_centerInParent="true"/>
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/text_view_choose_time_slot"></Spinner>
 
     <TextView
-        android:id="@+id/text_view_choose_barber"
+        android:id="@+id/text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/spinner1"
+        android:layout_above="@id/spinner"
         android:text="Choose a Barber"
-        android:textSize="@dimen/text_size"/>
-    <TextView
-        android:id="@+id/text_view_choose_time_slot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/spinner1"
-        android:text="Choose a Time Slot"
         android:textSize="@dimen/text_size"/>
 
     <Button
+        android:id="@+id/next_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/spinner2"
-        android:text="Go To register"
-        android:onClick="onClickRegister"/>
+        android:layout_below="@id/spinner"
+        android:text="Next"
+        android:onClick="onClickNext"/>
 </RelativeLayout>

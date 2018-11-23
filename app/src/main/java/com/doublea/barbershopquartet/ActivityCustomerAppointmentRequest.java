@@ -5,13 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.doublea.barbershopquartet.BackgroundTools.Barber;
 import com.doublea.barbershopquartet.BackgroundTools.FirebaseInteraction;
 import com.doublea.barbershopquartet.BackgroundTools.FirebaseReadListener;
-import com.doublea.barbershopquartet.BackgroundTools.TimeSlot;
 import com.google.firebase.database.DataSnapshot;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -19,9 +22,12 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
 
     private Spinner firstSpinner;
     private Spinner secondSpinner;
+    private TextView textView;
+    private Button button;
     private FirebaseInteraction firebaseInteraction;
     private ArrayList<Barber> listOfBarbers;
     protected static Barber barber;
+    private int stages;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,26 +36,13 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
     }
 
     private void intializeVariables() {
-        this.firstSpinner = (Spinner)findViewById(R.id.spinner1);
+        this.firstSpinner = (Spinner)findViewById(R.id.spinner);
         this.secondSpinner = (Spinner)findViewById(R.id.spinner2);
-        firebaseInteraction = new FirebaseInteraction();
+        this.textView = (TextView)findViewById(R.id.text_view);
+        this.button = (Button) findViewById(R.id.next_button);
+        this.firebaseInteraction = new FirebaseInteraction();
         this.listOfBarbers = new ArrayList<Barber>();
-    }
-
-    public void onClickRegister(View view) {
-
-        Object firstSpinnerSelection = firstSpinner.getSelectedItem(); // for now until we load data to firebase
-        Object secondSpinnerSelection = secondSpinner.getSelectedItem(); // for now until we load data to firebase
-
-        String barber = firstSpinnerSelection.toString();
-        String timeSlot = secondSpinnerSelection.toString();
-        //if(firstSpinnerSelection != null || secondSpinnerSelection != null){
-            Intent startNewActivity = new Intent(this, ActivityCustomerFillOutAppointment.class);
-            startNewActivity.putExtra("timeSlot", timeSlot);
-            startNewActivity.putExtra("barber", barber);
-            startActivity(startNewActivity);
-       // }
-
+        this.stages = 0;
     }
 
     @Override
@@ -89,4 +82,32 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
                 barber.child("phoneNumber").getValue().toString(), barber.child("email").getValue().toString(),
                 barber.child("description").getValue().toString(), barber.child("uid").getValue().toString());
     }
+
+    public void onClickNext(View view) {
+        switch(stages){
+            case 0:
+                this.stages++;
+                this.textView.setText("Choose a Date:");
+                getDate();
+                break;
+            case 1:
+                this.stages++;
+                this.textView.setText("Choose a Time Slot for your appointment");
+                getTimeSlot();
+                button.setText("Submit");
+                break;
+            case 2:
+                startActivity(new Intent(this, ActivityCustomerFillOutAppointment.class));
+        }
+    }
+
+    private void getTimeSlot() {
+
+    }
+
+    private void getDate() {
+        
+    }
+
+
 }
