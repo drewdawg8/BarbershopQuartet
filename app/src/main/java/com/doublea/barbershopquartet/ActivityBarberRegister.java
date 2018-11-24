@@ -40,11 +40,11 @@ public class ActivityBarberRegister extends AppCompatActivity {
 
     private void testInputs() {
         firstName.setText("Zach");
-        lastName.setText("parn");
-        phoneNumber.setText("12345");
-        email.setText("zach@gmail.com");
-        password.setText("123wdasdsa");
-        confirmPassWord.setText("123wdasdsa");
+        lastName.setText("Parn");
+        phoneNumber.setText("7037636929");
+        email.setText("zachary.parn@gmail.com");
+        password.setText("asdf");
+        confirmPassWord.setText("asdf");
         description.setText("I will shave you like my goat");
     }
 
@@ -80,6 +80,7 @@ public class ActivityBarberRegister extends AppCompatActivity {
                             updateUI(user.getUid());
                         } else {
                             // If sign in fails, display a message to the user.
+                            Toast.makeText(ActivityBarberRegister.this, "Sign up failed", Toast.LENGTH_SHORT).show();
                         }
 
                         // ...
@@ -106,6 +107,7 @@ public class ActivityBarberRegister extends AppCompatActivity {
         if (password.getText().toString().equals(confirmPassWord.getText().toString()))
             return true;
         else
+            Toast.makeText(ActivityBarberRegister.this, "Passwords don't match", Toast.LENGTH_SHORT).show();
             return false;
     }
 
@@ -125,6 +127,7 @@ public class ActivityBarberRegister extends AppCompatActivity {
             element.setBackgroundResource(R.drawable.background_error_txt_box);
             return false;
         }
+        element.setBackgroundResource(R.drawable.background_txt_box);
         return true;
     }
 

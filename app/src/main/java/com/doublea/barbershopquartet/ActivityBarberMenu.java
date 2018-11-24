@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class ActivityBarberMenu extends AppCompatActivity {
 
     private Button logoutBtn;
     private Button manageBtn;
     private Button appBtn;
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,12 +25,14 @@ public class ActivityBarberMenu extends AppCompatActivity {
         logoutBtn = findViewById(R.id.logout);
         manageBtn = findViewById(R.id.manageSchedule);
         appBtn = findViewById(R.id.selectApp);
+        mAuth = FirebaseAuth.getInstance();
     }
 
 
 
     public  void onClickLogout(View v){
-        startActivity(new Intent(ActivityBarberMenu.this, ActivityMain.class));
+        mAuth.signOut();
+        startActivity(new Intent(this,ActivityBarberLogin.class));
     }
 
     public void onClickManageSchedule(View v){
