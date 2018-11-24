@@ -1,6 +1,7 @@
 package com.doublea.barbershopquartet;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -77,6 +78,7 @@ public class ActivityBarberSelectAppointment extends AppCompatActivity {
     public void onClickSubmit(View view) {
         Spinner spinner = findViewById(R.id.select_appointment_spinner);
         selectedTimeSlot = (TimeSlot) spinner.getSelectedItem();
+        startActivity(new Intent(this, ActivityBarberManageAppointment.class));
     }
 
     private void getTimeSlots() {
