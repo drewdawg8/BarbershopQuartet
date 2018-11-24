@@ -199,6 +199,10 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
     private void loadSpinnerWithTimeSlots(ArrayList<TimeSlot> listOfTimeSlots) {
         ArrayList<String> datesOfTimeSlots = new ArrayList<String>();
         for(TimeSlot timeSlot : listOfTimeSlots){
+            // from stack overflow
+          /*  String currentTime = new SimpleDateFormat("HH mm").format(Calendar.getInstance().getTime());
+            String [] cTime = currentTime.split(" ");
+            String [] tTime = timeSlot.toString().split(":");*/
             if(!timeSlot.isBooked() && !timeSlot.isUnavailable())
                 datesOfTimeSlots.add(timeSlot.toString());
         }
