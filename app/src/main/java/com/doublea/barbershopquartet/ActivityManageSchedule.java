@@ -101,8 +101,8 @@ public class ActivityManageSchedule extends AppCompatActivity{
                     TimeSlot timeSlot = new TimeSlot(d.child("month").getValue().toString(), d.child("day").getValue().toString(),
                             d.child("hour").getValue().toString(), d.child("minute").getValue().toString(), app);
 
-                    timeSlot.setBooked(Boolean.parseBoolean(d.child("booked").getValue().toString()));
-                    timeSlot.setUnavailable(Boolean.parseBoolean(d.child("unavailable").getValue().toString()));
+                    timeSlot.setBooked((boolean)d.child("booked").getValue());
+                    timeSlot.setUnavailable((boolean)d.child("unavailable").getValue());
 
                     timeSlots[i] = timeSlot;
 
