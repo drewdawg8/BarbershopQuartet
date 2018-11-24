@@ -1,17 +1,27 @@
 package com.doublea.barbershopquartet.BackgroundTools;
 
-import android.util.Log;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.File;
 
 public class FirebaseInteraction {
     private FirebaseDatabase database;
+    private StorageReference storageRef;
     public FirebaseInteraction(){
         database = FirebaseDatabase.getInstance();
+        storageRef = FirebaseStorage.getInstance().getReference();
     }
 
 
@@ -67,7 +77,38 @@ public class FirebaseInteraction {
         DatabaseReference currentPath = database.getReference(path);
         currentPath.setValue(value);
     }
+    public void uploadFile(String path, final FileUploadListener uploadListener){
+        File localFile = new File(path);
+        Uri file = Uri.fromFile(localFile);
+        StorageReference riversRef = storageRef.child("images/" + localFile.getName());
 
+        riversRef.putFile(file)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        // Get a URL to the uploaded content
+                        Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                        uploadListener.onSuccess(downloadUrl.toString());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle unsuccessful uploads
+                        // ...
+                        uploadListener.onFailure();
+                    }
+                });
+    }
+
+    /**
+     * @TODO Implement download component
+     * @param url
+     * @param downloadListener
+     */
+    public void downloadFile(String url, FileDownloadListener downloadListener){
+
+    }
     /**
      * Barbers
      * @param value object to be written
