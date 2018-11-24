@@ -59,6 +59,7 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        emptySpiner();
         firebaseInteraction.read("Barbers", new FirebaseReadListener() {
             @Override
             public void onSuccess(DataSnapshot data) {
@@ -73,6 +74,15 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void emptySpiner() {
+        ArrayList<String> list = new ArrayList<String>();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, list);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
     }
 
     private void populateFirstSpinner() {
