@@ -35,62 +35,62 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_weight="1">
-                <RadioButton
-                    android:id="@+id/radio_timeslot0"
+                <CheckBox
+                    android:id="@+id/schedule_checkbox0"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="9:00 A.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickRadioButton"/>
-                <RadioButton
-                    android:id="@+id/radio_timeslot1"
+                    android:onClick="onClickCheckBox"/>
+                <CheckBox
+                    android:id="@+id/schedule_checkbox1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="9:30 A.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickRadioButton"/>
-                <RadioButton
-                    android:id="@+id/radio_timeslot2"
+                    android:onClick="onClickCheckBox"/>
+                <CheckBox
+                    android:id="@+id/schedule_checkbox2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="10:00 A.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickRadioButton"/>
-                <RadioButton
-                    android:id="@+id/radio_timeslot3"
+                    android:onClick="onClickCheckBox"/>
+                <CheckBox
+                    android:id="@+id/schedule_checkbox3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="10:30 A.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickRadioButton"/>
-                <RadioButton
-                    android:id="@+id/radio_timeslot4"
+                    android:onClick="onClickCheckBox"/>
+                <CheckBox
+                    android:id="@+id/schedule_checkbox4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="11:00 A.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickRadioButton"/>
-                <RadioButton
-                    android:id="@+id/radio_timeslot5"
+                    android:onClick="onClickCheckBox"/>
+                <CheckBox
+                    android:id="@+id/schedule_checkbox5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="11:30 A.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickRadioButton"/>
-                <RadioButton
-                    android:id="@+id/radio_timeslot6"
+                    android:onClick="onClickCheckBox"/>
+                <CheckBox
+                    android:id="@+id/schedule_checkbox6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="12:00 P.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickRadioButton"/>
-                <RadioButton
-                    android:id="@+id/radio_timeslot7"
+                    android:onClick="onClickCheckBox"/>
+                <CheckBox
+                    android:id="@+id/schedule_checkbox7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="12:30 P.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickRadioButton"/>
+                    android:onClick="onClickCheckBox"/>
             </LinearLayout>
 
             <LinearLayout
@@ -98,62 +98,62 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_weight="1">
-                <RadioButton
-                    android:id="@+id/radio_timeslot8"
+                <CheckBox
+                    android:id="@+id/schedule_checkbox8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="1:00 P.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickRadioButton"/>
-                <RadioButton
-                    android:id="@+id/radio_timeslot9"
+                    android:onClick="onClickCheckBox"/>
+                <CheckBox
+                    android:id="@+id/schedule_checkbox9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="1:30 P.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickRadioButton"/>
-                <RadioButton
-                    android:id="@+id/radio_timeslot10"
+                    android:onClick="onClickCheckBox"/>
+                <CheckBox
+                    android:id="@+id/schedule_checkbox10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="2:00 P.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickRadioButton"/>
-                <RadioButton
-                    android:id="@+id/radio_timeslot11"
+                    android:onClick="onClickCheckBox"/>
+                <CheckBox
+                    android:id="@+id/schedule_checkbox11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="2:30 P.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickRadioButton"/>
-                <RadioButton
-                    android:id="@+id/radio_timeslot12"
+                    android:onClick="onClickCheckBox"/>
+                <CheckBox
+                    android:id="@+id/schedule_checkbox12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="3:00 P.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickRadioButton"/>
-                <RadioButton
-                    android:id="@+id/radio_timeslot13"
+                    android:onClick="onClickCheckBox"/>
+                <CheckBox
+                    android:id="@+id/schedule_checkbox13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="3:30 P.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickRadioButton"/>
-                <RadioButton
-                    android:id="@+id/radio_timeslot14"
+                    android:onClick="onClickCheckBox"/>
+                <CheckBox
+                    android:id="@+id/schedule_checkbox14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="4:00 P.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickRadioButton"/>
-                <RadioButton
-                    android:id="@+id/radio_timeslot15"
+                    android:onClick="onClickCheckBox"/>
+                <CheckBox
+                    android:id="@+id/schedule_checkbox15"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="4:30 P.M."
                     android:textSize="@dimen/text_size"
-                    android:onClick="onClickRadioButton"/>
+                    android:onClick="onClickCheckBox"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

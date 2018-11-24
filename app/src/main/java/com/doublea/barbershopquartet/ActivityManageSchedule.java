@@ -4,12 +4,12 @@ import android.app.DatePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.doublea.barbershopquartet.BackgroundTools.Appointment;
-import com.doublea.barbershopquartet.BackgroundTools.Barber;
 import com.doublea.barbershopquartet.BackgroundTools.FirebaseInteraction;
 import com.doublea.barbershopquartet.BackgroundTools.FirebaseReadListener;
 import com.doublea.barbershopquartet.BackgroundTools.TimeSlot;
@@ -18,11 +18,10 @@ import com.google.firebase.database.DataSnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class ActivityManageSchedule extends AppCompatActivity{
 
-    private RadioButton[] radioButtons;
+    private CheckBox[] checkBoxes;
     private FirebaseInteraction firebase;
     private FirebaseAuth mAuth;
     private Calendar scheduleDate; // date to edit
@@ -33,23 +32,23 @@ public class ActivityManageSchedule extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_schedule);
 
-        radioButtons = new RadioButton[]{
-                findViewById(R.id.radio_timeslot0),
-                findViewById(R.id.radio_timeslot1),
-                findViewById(R.id.radio_timeslot2),
-                findViewById(R.id.radio_timeslot3),
-                findViewById(R.id.radio_timeslot4),
-                findViewById(R.id.radio_timeslot5),
-                findViewById(R.id.radio_timeslot6),
-                findViewById(R.id.radio_timeslot7),
-                findViewById(R.id.radio_timeslot8),
-                findViewById(R.id.radio_timeslot9),
-                findViewById(R.id.radio_timeslot10),
-                findViewById(R.id.radio_timeslot11),
-                findViewById(R.id.radio_timeslot12),
-                findViewById(R.id.radio_timeslot13),
-                findViewById(R.id.radio_timeslot14),
-                findViewById(R.id.radio_timeslot15)};
+        checkBoxes = new CheckBox[]{
+                findViewById(R.id.schedule_checkbox0),
+                findViewById(R.id.schedule_checkbox1),
+                findViewById(R.id.schedule_checkbox2),
+                findViewById(R.id.schedule_checkbox3),
+                findViewById(R.id.schedule_checkbox4),
+                findViewById(R.id.schedule_checkbox5),
+                findViewById(R.id.schedule_checkbox6),
+                findViewById(R.id.schedule_checkbox7),
+                findViewById(R.id.schedule_checkbox8),
+                findViewById(R.id.schedule_checkbox9),
+                findViewById(R.id.schedule_checkbox10),
+                findViewById(R.id.schedule_checkbox11),
+                findViewById(R.id.schedule_checkbox12),
+                findViewById(R.id.schedule_checkbox13),
+                findViewById(R.id.schedule_checkbox14),
+                findViewById(R.id.schedule_checkbox15)};
 
         firebase = new FirebaseInteraction();
         mAuth = FirebaseAuth.getInstance();
@@ -59,10 +58,11 @@ public class ActivityManageSchedule extends AppCompatActivity{
     public void onStart() {
         super.onStart();
 
-        for (RadioButton rb : radioButtons) rb.setEnabled(false);
+        for (CheckBox c : checkBoxes) c.setEnabled(false);
         findViewById(R.id.schedule_button_submit).setEnabled(false);
         EditText t = findViewById(R.id.schedule_edit_text_display_date);
         t.setText("");
+        timeSlots = new TimeSlot[16];
     }
 
     public void onClickSelectDate(View view) {
@@ -79,7 +79,7 @@ public class ActivityManageSchedule extends AppCompatActivity{
                 SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM dd");
                 e.setText(sdf.format(calendar.getTime()));
                 scheduleDate = calendar;
-                populateRadioButtons();
+                populateCheckBoxs();
             }
         }, initYear, initMonth, initDay);
 
@@ -93,10 +93,11 @@ public class ActivityManageSchedule extends AppCompatActivity{
         datePickerDialog.show();
     }
 
-    private void populateRadioButtons() {
-        for (RadioButton rb : radioButtons) rb.setEnabled(true);
+    private void populateCheckBoxs() {
+        clearCheckBoxes();
+        for (CheckBox c : checkBoxes) c.setEnabled(true);
 
-        String month = Integer.toString(scheduleDate.get(Calendar.MONTH)) + 1;
+        String month = Integer.toString(scheduleDate.get(Calendar.MONTH) + 1);
         String day = Integer.toString(scheduleDate.get(Calendar.DAY_OF_MONTH));
 
         String UID = mAuth.getUid();
@@ -115,67 +116,67 @@ public class ActivityManageSchedule extends AppCompatActivity{
 
                     timeSlots[i] = timeSlot;
 
-                    if (!timeSlot.isUnavailable()) radioButtons[i].setChecked(true);
+                    if (!timeSlot.isUnavailable()) checkBoxes[i].setChecked(true);
                 }
             }
 
             @Override
             public void onFailure() {
-
+                Toast.makeText(ActivityManageSchedule.this, "Could not load timeslots.", Toast.LENGTH_SHORT).show();
             }
         });
 
         findViewById(R.id.schedule_button_submit).setEnabled(true);
     }
 
-    public void onClickRadioButton(View view) {
-        boolean checked = ((RadioButton) view).isChecked();
+    public void onClickCheckBox(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
         TimeSlot timeSlot;
 
         switch(view.getId()) {
-            case R.id.radio_timeslot0:
+            case R.id.schedule_checkbox0:
                 timeSlot = timeSlots[0];
                 break;
-            case R.id.radio_timeslot1:
+            case R.id.schedule_checkbox1:
                 timeSlot = timeSlots[1];
                 break;
-            case R.id.radio_timeslot2:
+            case R.id.schedule_checkbox2:
                 timeSlot = timeSlots[2];
                 break;
-            case R.id.radio_timeslot3:
+            case R.id.schedule_checkbox3:
                 timeSlot = timeSlots[3];
                 break;
-            case R.id.radio_timeslot4:
+            case R.id.schedule_checkbox4:
                 timeSlot = timeSlots[4];
                 break;
-            case R.id.radio_timeslot5:
+            case R.id.schedule_checkbox5:
                 timeSlot = timeSlots[5];
                 break;
-            case R.id.radio_timeslot6:
+            case R.id.schedule_checkbox6:
                 timeSlot = timeSlots[6];
                 break;
-            case R.id.radio_timeslot7:
+            case R.id.schedule_checkbox7:
                 timeSlot = timeSlots[7];
                 break;
-            case R.id.radio_timeslot8:
+            case R.id.schedule_checkbox8:
                 timeSlot = timeSlots[8];
                 break;
-            case R.id.radio_timeslot9:
+            case R.id.schedule_checkbox9:
                 timeSlot = timeSlots[9];
                 break;
-            case R.id.radio_timeslot10:
+            case R.id.schedule_checkbox10:
                 timeSlot = timeSlots[10];
                 break;
-            case R.id.radio_timeslot11:
+            case R.id.schedule_checkbox11:
                 timeSlot = timeSlots[11];
                 break;
-            case R.id.radio_timeslot12:
+            case R.id.schedule_checkbox12:
                 timeSlot = timeSlots[12];
                 break;
-            case R.id.radio_timeslot13:
+            case R.id.schedule_checkbox13:
                 timeSlot = timeSlots[13];
                 break;
-            case R.id.radio_timeslot14:
+            case R.id.schedule_checkbox14:
                 timeSlot = timeSlots[14];
                 break;
             default:
@@ -192,6 +193,7 @@ public class ActivityManageSchedule extends AppCompatActivity{
 
     public void onClickSubmit(View view) {
 
+        clearCheckBoxes();
         for (int i = 0; i < 16; i++) {
             TimeSlot t = timeSlots[i];
             if (t.isUnavailable() && t.isBooked()) {
@@ -201,5 +203,9 @@ public class ActivityManageSchedule extends AppCompatActivity{
             firebase.writeTimeslot(t, mAuth.getUid());
         }
         this.onStart();
+    }
+    
+    private void clearCheckBoxes() {
+        for (CheckBox c : checkBoxes) c.setChecked(false);
     }
 }
