@@ -10,19 +10,33 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
         >
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Date"
+            android:onClick="onClickSelectDate"/>
+        <EditText
+            android:id="@+id/select_appointment_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text = "Select an appointment:"/>
         <Spinner
+            android:id="@+id/select_appointment_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
         </Spinner>
-        <Button
-            android:id="@+id/submit_appointment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text = "Submit"/>
     </LinearLayout>
+    <Button
+        android:id="@+id/select_appointment_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:layout_alignParentBottom="true"
+        android:onClick="onClickSubmit"
+        android:enabled="false"/>
 </RelativeLayout>
