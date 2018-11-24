@@ -24,6 +24,7 @@ public class ActivityManageSchedule extends AppCompatActivity{
 
     private RadioButton[] radioButtons;
     private FirebaseInteraction firebase;
+    private FirebaseAuth mAuth;
     private Calendar scheduleDate; // date to edit
     private TimeSlot[] timeSlots;
 
@@ -50,9 +51,18 @@ public class ActivityManageSchedule extends AppCompatActivity{
                 findViewById(R.id.radio_timeslot14),
                 findViewById(R.id.radio_timeslot15)};
 
-        for (RadioButton rb : radioButtons) rb.setEnabled(false);
-
         firebase = new FirebaseInteraction();
+        mAuth = FirebaseAuth.getInstance();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        for (RadioButton rb : radioButtons) rb.setEnabled(false);
+        findViewById(R.id.schedule_button_submit).setEnabled(false);
+        EditText t = findViewById(R.id.schedule_edit_text_display_date);
+        t.setText("");
     }
 
     public void onClickSelectDate(View view) {
@@ -89,8 +99,7 @@ public class ActivityManageSchedule extends AppCompatActivity{
         String month = Integer.toString(scheduleDate.get(Calendar.MONTH)) + 1;
         String day = Integer.toString(scheduleDate.get(Calendar.DAY_OF_MONTH));
 
-        Barber barber = ActivityBarberLogin.barber;
-        String UID = barber.getUid();
+        String UID = mAuth.getUid();
         String path = "Barbers/" + UID + "/" + month + "/" + day;
         firebase.read(path, new FirebaseReadListener() {
             @Override
@@ -182,8 +191,15 @@ public class ActivityManageSchedule extends AppCompatActivity{
     }
 
     public void onClickSubmit(View view) {
-        // TODO write timeSlots array to database; check if booked appointments need to be removed?
 
-        this.recreate(); // relaunch the activity to select another date
+        for (int i = 0; i < 16; i++) {
+            TimeSlot t = timeSlots[i];
+            if (t.isUnavailable() && t.isBooked()) {
+                t.setBooked(false);
+                t.setAppointment(null);
+            }
+            firebase.writeTimeslot(t, mAuth.getUid());
+        }
+        this.onStart();
     }
 }
