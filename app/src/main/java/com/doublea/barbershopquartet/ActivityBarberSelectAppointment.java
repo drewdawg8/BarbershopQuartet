@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.doublea.barbershopquartet.BackgroundTools.Appointment;
+import com.doublea.barbershopquartet.BackgroundTools.Customer;
 import com.doublea.barbershopquartet.BackgroundTools.FirebaseInteraction;
 import com.doublea.barbershopquartet.BackgroundTools.FirebaseReadListener;
 import com.doublea.barbershopquartet.BackgroundTools.TimeSlot;
@@ -27,6 +28,8 @@ public class ActivityBarberSelectAppointment extends AppCompatActivity {
 
     private Calendar appointmentDate;
     TimeSlot[] timeSlots;
+
+    protected static TimeSlot selectedTimeSlot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +60,6 @@ public class ActivityBarberSelectAppointment extends AppCompatActivity {
                 e.setText(sdf.format(calendar.getTime()));
                 appointmentDate = calendar;
                 getTimeSlots();
-                populateSpinner();
                 findViewById(R.id.select_appointment_submit).setEnabled(true);
             }
         }, initYear, initMonth, initDay);
@@ -74,10 +76,7 @@ public class ActivityBarberSelectAppointment extends AppCompatActivity {
 
     public void onClickSubmit(View view) {
         Spinner spinner = findViewById(R.id.select_appointment_spinner);
-        TimeSlot choice = (TimeSlot) spinner.getSelectedItem();
-        Appointment app = choice.getAppointment();
-
-        // TODO pass appointment to ActivityBarberManageAppointment
+        selectedTimeSlot = (TimeSlot) spinner.getSelectedItem();
     }
 
     private void getTimeSlots() {
@@ -92,15 +91,12 @@ public class ActivityBarberSelectAppointment extends AppCompatActivity {
 
                 for (DataSnapshot d: data.getChildren()) {
                     int i = Integer.parseInt(d.getKey());
-                    Appointment app = d.child("appointment").getValue(Appointment.class);
-                    TimeSlot timeSlot = new TimeSlot(d.child("month").getValue().toString(), d.child("day").getValue().toString(),
-                            d.child("hour").getValue().toString(), d.child("minute").getValue().toString(), app);
 
-                    timeSlot.setBooked((boolean) d.child("booked").getValue());
-                    timeSlot.setUnavailable((boolean) d.child("unavailable").getValue());
+                    TimeSlot timeSlot = extractTimeSlot(d);
 
                     timeSlots[i] = timeSlot;
                 }
+                populateSpinner();
             }
 
             @Override
@@ -110,12 +106,27 @@ public class ActivityBarberSelectAppointment extends AppCompatActivity {
         });
     }
 
+    private TimeSlot extractTimeSlot(DataSnapshot timeSlot) {
+        return new TimeSlot(timeSlot.child("month").getValue().toString(),
+                timeSlot.child("day").getValue().toString(), timeSlot.child("hour").getValue().toString(),
+                timeSlot.child("minute").getValue().toString(), extractAppointment(timeSlot.child("appointment")), (boolean)timeSlot.child("booked").getValue(),
+                (boolean)timeSlot.child("unavailable").getValue());
+    }
+
+    private Appointment extractAppointment(DataSnapshot appointment) {
+        return (appointment.getValue() == null)?null:new Appointment(appointment.child("notes").getValue().toString(),appointment.child("url").getValue().toString(),extractCustomer(appointment.child("customer")));
+    }
+
+    private Customer extractCustomer(DataSnapshot customer) {
+        return new Customer(customer.child("firstName").getValue().toString(), customer.child("lastName").getValue().toString(), customer.child("phoneNumber").getValue().toString(), customer.child("email").getValue().toString());
+    }
+
     private void populateSpinner() {
         Spinner spinner = findViewById(R.id.select_appointment_spinner);
 
         ArrayList<TimeSlot> bookedSlots = new ArrayList<>();
         for (TimeSlot t : timeSlots) {
-            if (!t.isUnavailable() && !t.isBooked()) {
+            if (!t.isUnavailable() && t.isBooked()) {
                 bookedSlots.add(t);
             }
         }
