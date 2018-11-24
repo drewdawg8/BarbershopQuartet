@@ -15,8 +15,10 @@ import android.widget.TextView;
 import com.doublea.barbershopquartet.BackgroundTools.Barber;
 import com.doublea.barbershopquartet.BackgroundTools.FirebaseInteraction;
 import com.doublea.barbershopquartet.BackgroundTools.FirebaseReadListener;
+import com.doublea.barbershopquartet.BackgroundTools.TimeSlot;
 import com.google.firebase.database.DataSnapshot;
 
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,6 +31,7 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
     private FirebaseInteraction firebaseInteraction;
     private ArrayList<Barber> listOfBarbers;
     private ArrayList<String> barberNames;
+    private ArrayList<TimeSlot> listOfTimeSlots;
     protected static Barber barber;
     private int stages;
     @Override
@@ -44,6 +47,7 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
         this.button = (Button) findViewById(R.id.next_button);
         this.firebaseInteraction = new FirebaseInteraction();
         this.listOfBarbers = new ArrayList<Barber>();
+        this.listOfTimeSlots = new ArrayList<TimeSlot>();
         this.stages = 0;
     }
 
@@ -150,7 +154,10 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
         firebaseInteraction.read(path, new FirebaseReadListener() {
             @Override
             public void onSuccess(DataSnapshot data) {
-                
+                for(DataSnapshot timeSlot : data.getChildren()){
+                    listOfTimeSlots.add(extractTimeSlot(timeSlot));
+                }
+                loadSpinnerWithTimeSlots(listOfTimeSlots);
             }
 
             @Override
@@ -158,6 +165,17 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void loadSpinnerWithTimeSlots(ArrayList<TimeSlot> listOfTimeSlots) {
+
+    }
+
+    private TimeSlot extractTimeSlot(DataSnapshot timeSlot) {
+        return new TimeSlot(timeSlot.child("month").getValue().toString(),
+                timeSlot.child("day").getValue().toString(), timeSlot.child("hour").getValue().toString(),
+                timeSlot.child("minute").getValue().toString(), null, (boolean)timeSlot.child("booked").getValue(),
+                (boolean)timeSlot.child("unavailable").getValue());
     }
 
 

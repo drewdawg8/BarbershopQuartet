@@ -27,6 +27,18 @@ public class TimeSlot {
         this.unavailable = false;
     }
 
+    public TimeSlot(String month, String day, String hour, String minute, Appointment appointment,
+                    boolean booked, boolean unavailable){
+        this.month = month;
+        this.day = day;
+        this.hour = hour;
+        this.minute = minute;
+        this.appointment = appointment;
+        /* two variables to determine the availability of the TimeSlot */
+        this.booked = booked;
+        this.unavailable = unavailable;
+    }
+
     /**
      * Method to set minute
      * @param minute String minute
