@@ -17,9 +17,16 @@ import com.doublea.barbershopquartet.BackgroundTools.Customer;
 import com.doublea.barbershopquartet.BackgroundTools.FirebaseInteraction;
 import com.doublea.barbershopquartet.BackgroundTools.TimeSlot;
 
+import static com.doublea.barbershopquartet.ActivityCustomerAppointmentRequest.barber;
+import static com.doublea.barbershopquartet.ActivityCustomerAppointmentRequest.timeSlot;
+
 public class ActivityCustomerFillOutAppointment extends AppCompatActivity {
 
     FirebaseInteraction firebaseInteraction = new FirebaseInteraction();
+    private Appointment appointment;
+    private Customer customer;
+    private String url;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,60 +34,60 @@ public class ActivityCustomerFillOutAppointment extends AppCompatActivity {
 
     }
 
-    private Appointment appointment;
-    private String url;
+    private boolean initializeAndCheckAppointmentValues(){
+        boolean entered = true;
+        EditText edit = (EditText)findViewById(R.id.edit_text_first_name);
+        if(edit.getText().toString().equals("")){
+            entered = false;
+           edit.setHintTextColor(Color.RED);
+        }
+        customer.setFirstName(edit.getText().toString());
+        edit = (EditText)findViewById(R.id.edit_text_last_name);
+        if(edit.getText().toString().equals("")){
+            entered = false;
+            edit.setHintTextColor(Color.RED);
+        }
+        customer.setLastName(edit.getText().toString());
+        edit = (EditText)findViewById(R.id.edit_text_email);
+        if(edit.getText().toString().equals("")){
+            entered = false;
+            edit.setHintTextColor(Color.RED);
+        }
+        customer.setEmail(edit.getText().toString());
+        edit = (EditText)findViewById(R.id.edit_text_phone_number);
+        if(edit.getText().toString().equals("")){
+            entered = false;
+            edit.setHintTextColor(Color.RED);
+        }
+        customer.setPhoneNumber(edit.getText().toString());
+        edit = (EditText)findViewById(R.id.edit_text_notes);
+        appointment.setCustomer(customer);
+        appointment.setNotes(edit.getText().toString());
+        appointment.setURL(this.url);
+        return entered;
+    }
 
     public void onClickReserveAppointment(View view) {
-        String time = getIntent().getExtras().getParcelable("timeSlot");
-        String barber = getIntent().getExtras().getParcelable("barber");
-        Intent goToMain;
-        EditText edit = (EditText)findViewById(R.id.edit_text_first_name);
-        String firstName = edit.getText().toString();
-        edit = (EditText)findViewById(R.id.edit_text_last_name);
-        String lastName = edit.getText().toString();
-        edit = (EditText)findViewById(R.id.edit_text_email);
-        String email = edit.getText().toString();
-        edit = (EditText)findViewById(R.id.edit_text_phone_number);
-        String phoneNumber = edit.getText().toString();
-        edit = (EditText)findViewById(R.id.edit_text_notes);
-        String notes = edit.getText().toString();
-
-        // we need to update this so that it ensures email is a valid email.
-        if(!firstName.matches("") && !lastName.matches("") && !email.matches("")
-                && !phoneNumber.matches( "")) {
-            // create appointment object with url, notes, and customer
-            appointment = new Appointment(notes, this.url, new Customer(firstName, lastName, phoneNumber, email));
-            String timeInformation[] = time.split(":");
-            TimeSlot timeSlot = new TimeSlot(timeInformation[0],timeInformation[1],timeInformation[2],timeInformation[3], appointment);
-
-            // write the new TimeSlot to the specific Barber and replace the current timeSlot
-            //firebaseInteraction.writeTimeslot(timeSlot, new );
-            goToMain = new Intent(this, ActivityMain.class);
-            startActivity(goToMain);
+        if(initializeAndCheckAppointmentValues()){
+            // send TimeSlot with appointment and image information
+            initialzeTimeSlotAndSendToFirebase();
+            // go to next activity
+            startActivity(new Intent(this, ActivityMain.class));
         }
-        else
-        {
-            if(firstName == ""){
-                edit = (EditText)findViewById(R.id.edit_text_first_name);
-                edit.setHintTextColor(Color.RED);
-            }
-            if(lastName == ""){
-                edit = (EditText)findViewById(R.id.edit_text_last_name);
-                edit.setHintTextColor(Color.RED);
-            }
-            if(email == ""){
-                edit = (EditText)findViewById(R.id.edit_text_email);
-                edit.setHintTextColor(Color.RED);
-            }
-            if(phoneNumber == ""){
-                edit = (EditText)findViewById(R.id.edit_text_phone_number);
-                edit.setHintTextColor(Color.RED);
-            }
-        }
+
+    }
+
+    private void initialzeTimeSlotAndSendToFirebase() {
+        timeSlot.setAppointment(appointment);
+        timeSlot.setBooked(true);
+        // send to firebase with precise mapping
+        firebaseInteraction.writeTimeslot(timeSlot, barber);
     }
 
 
     public void onClickUploadPhoto(View view) {
 
+        this.url = "";
+        // set the class variable url to obtained URL
     }
 }
