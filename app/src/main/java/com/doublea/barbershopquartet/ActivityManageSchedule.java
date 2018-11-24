@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.doublea.barbershopquartet.BackgroundTools.Appointment;
+import com.doublea.barbershopquartet.BackgroundTools.Customer;
 import com.doublea.barbershopquartet.BackgroundTools.FirebaseInteraction;
 import com.doublea.barbershopquartet.BackgroundTools.FirebaseReadListener;
 import com.doublea.barbershopquartet.BackgroundTools.TimeSlot;
@@ -107,12 +108,8 @@ public class ActivityManageSchedule extends AppCompatActivity{
             public void onSuccess(DataSnapshot data) {
                 for (DataSnapshot d: data.getChildren()){
                     int i = Integer.parseInt(d.getKey());
-                    Appointment app = d.child("appointment").getValue(Appointment.class);
-                    TimeSlot timeSlot = new TimeSlot(d.child("month").getValue().toString(), d.child("day").getValue().toString(),
-                            d.child("hour").getValue().toString(), d.child("minute").getValue().toString(), app);
 
-                    timeSlot.setBooked((boolean)d.child("booked").getValue());
-                    timeSlot.setUnavailable((boolean)d.child("unavailable").getValue());
+                    TimeSlot timeSlot = extractTimeSlot(d);
 
                     timeSlots[i] = timeSlot;
 
@@ -207,5 +204,20 @@ public class ActivityManageSchedule extends AppCompatActivity{
     
     private void clearCheckBoxes() {
         for (CheckBox c : checkBoxes) c.setChecked(false);
+    }
+
+    private TimeSlot extractTimeSlot(DataSnapshot timeSlot) {
+        return new TimeSlot(timeSlot.child("month").getValue().toString(),
+                timeSlot.child("day").getValue().toString(), timeSlot.child("hour").getValue().toString(),
+                timeSlot.child("minute").getValue().toString(), extractAppointment(timeSlot.child("appointment")), (boolean)timeSlot.child("booked").getValue(),
+                (boolean)timeSlot.child("unavailable").getValue());
+    }
+
+    private Appointment extractAppointment(DataSnapshot appointment) {
+        return (appointment.getValue() == null)?null:new Appointment(appointment.child("notes").getValue().toString(),appointment.child("url").getValue().toString(),extractCustomer(appointment.child("customer")));
+    }
+
+    private Customer extractCustomer(DataSnapshot customer) {
+        return new Customer(customer.child("firstName").getValue().toString(), customer.child("lastName").getValue().toString(), customer.child("phoneNumber").getValue().toString(), customer.child("email").getValue().toString());
     }
 }
