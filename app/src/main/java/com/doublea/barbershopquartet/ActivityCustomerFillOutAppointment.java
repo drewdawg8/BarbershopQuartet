@@ -31,7 +31,13 @@ public class ActivityCustomerFillOutAppointment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_fill_out_appointment);
+        initializeVariables();
+    }
 
+    private void initializeVariables(){
+        appointment = new Appointment(null, null, null);
+        customer = new Customer(null, null, null, null);
+        url = "";
     }
 
     private boolean initializeAndCheckAppointmentValues(){
