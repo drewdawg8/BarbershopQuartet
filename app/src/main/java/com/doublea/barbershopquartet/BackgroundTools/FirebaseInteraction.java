@@ -77,10 +77,9 @@ public class FirebaseInteraction {
         DatabaseReference currentPath = database.getReference(path);
         currentPath.setValue(value);
     }
-    public void uploadFile(String path, final FileUploadListener uploadListener){
-        File localFile = new File(path);
-        Uri file = Uri.fromFile(localFile);
-        StorageReference riversRef = storageRef.child("images/" + localFile.getName());
+    public void uploadFile(Uri currentUri, final FileUploadListener uploadListener){
+        Uri file = currentUri;
+        StorageReference riversRef = storageRef.child("image/" + file.getPath());
 
         riversRef.putFile(file)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
