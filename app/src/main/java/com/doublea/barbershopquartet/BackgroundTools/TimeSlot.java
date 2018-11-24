@@ -127,9 +127,10 @@ public class TimeSlot {
      * @return String with appointment information
      */
     public String toString(){
-        return this.getMonth() + ":" + this.getDay() + ":" + this.getHour() + ":" + this.getMinute();
+        String pmam = (Integer.parseInt(this.getHour()) > 11)? " PM" : " AM";
+        return (Integer.parseInt(this.getHour()) > 12)? (Integer.parseInt(this.getHour())- 12) + ":" +
+                ((this.getMinute().length() == 1)?"00":"30") + pmam : this.getHour() + ":" + ((this.getMinute().length() == 1)?"00":"30") + pmam;
     }
-
     /**
      * Method to return status of TimeSlot, if its currently booked or not
      * @return boolean True if TimeSlot is booked, false if not.

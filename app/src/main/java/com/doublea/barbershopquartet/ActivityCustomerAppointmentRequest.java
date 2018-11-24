@@ -11,6 +11,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.doublea.barbershopquartet.BackgroundTools.Barber;
 import com.doublea.barbershopquartet.BackgroundTools.FirebaseInteraction;
@@ -18,6 +19,7 @@ import com.doublea.barbershopquartet.BackgroundTools.FirebaseReadListener;
 import com.doublea.barbershopquartet.BackgroundTools.TimeSlot;
 import com.google.firebase.database.DataSnapshot;
 
+import java.sql.Array;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
     private ArrayList<String> barberNames;
     private ArrayList<TimeSlot> listOfTimeSlots;
     protected static Barber barber;
+    protected static TimeSlot timeSlot;
     private int stages;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,8 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
         this.firebaseInteraction = new FirebaseInteraction();
         this.listOfBarbers = new ArrayList<Barber>();
         this.listOfTimeSlots = new ArrayList<TimeSlot>();
+        barber = new Barber(null, null, null, null, null);
+        timeSlot = new TimeSlot(null, null, null, null, null);
         this.stages = 0;
     }
 
@@ -92,19 +97,15 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
     public void onClickNext(View view) {
         switch(stages){
             case 0:
-                this.stages++;
                 getSelectedBarber();
-                this.textView.setText("Choose a Date:");
+                Toast.makeText(ActivityCustomerAppointmentRequest.this,"Pick your date",Toast.LENGTH_SHORT).show();
                 getDate(view);
                 break;
             case 1:
                 this.stages++;
-                this.textView.setText("Choose a Time Slot for your Appointment");
                 getTimeSlot();
-                button.setText("Submit");
-                break;
-            case 2:
                 startActivity(new Intent(this, ActivityCustomerFillOutAppointment.class));
+                break;
         }
     }
 
@@ -119,8 +120,21 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
     }
 
     private void getTimeSlot() {
-        String timeSlot = spinner.getSelectedItem().toString();
-
+        String choice = spinner.getSelectedItem().toString();
+        String [] array = choice.split(":");
+        String [] m = array[1].split(" ");
+        if(array[0].equals("12")){
+            timeSlot.setHour(array[0]);
+        }
+        else if(m[1].equals("AM")){
+            timeSlot.setHour(array[0]);
+        }
+        else
+            timeSlot.setHour(Integer.toString(Integer.parseInt(array[0]) + 12));
+        if (m[0].equals("00")) {
+            m[0] = "0";
+        }
+        timeSlot.setMinute(m[0]);
     }
 
     private void getDate(View view) {
@@ -130,7 +144,12 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(view.getContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int y, int m, int d) {
-                populateSpinnerTimeSlots(m, d);
+                stages++;
+                timeSlot.setMonth(Integer.toString(m + 1));
+                timeSlot.setDay(Integer.toString(d));
+                populateSpinnerTimeSlots(m + 1, d);
+                textView.setText("Choose a Time Slot for your Appointment");
+                button.setText("Submit");
 
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(y, m, d);
@@ -168,7 +187,17 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
     }
 
     private void loadSpinnerWithTimeSlots(ArrayList<TimeSlot> listOfTimeSlots) {
+        ArrayList<String> datesOfTimeSlots = new ArrayList<String>();
+        for(TimeSlot timeSlot : listOfTimeSlots){
+            if(!timeSlot.isBooked() && !timeSlot.isUnavailable())
+                datesOfTimeSlots.add(timeSlot.toString());
+        }
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, datesOfTimeSlots);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
     }
 
     private TimeSlot extractTimeSlot(DataSnapshot timeSlot) {
