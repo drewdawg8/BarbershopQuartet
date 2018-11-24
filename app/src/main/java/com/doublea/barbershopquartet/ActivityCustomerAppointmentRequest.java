@@ -44,6 +44,9 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
         intializeVariables();
     }
 
+    /**
+     * Initializes all variables
+     */
     private void intializeVariables() {
         this.spinner = (Spinner)findViewById(R.id.spinner);
         this.textView = (TextView)findViewById(R.id.text_view);
