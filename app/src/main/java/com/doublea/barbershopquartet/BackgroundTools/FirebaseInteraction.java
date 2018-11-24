@@ -108,6 +108,7 @@ public class FirebaseInteraction {
      */
     public void downloadFile(String url, FileDownloadListener downloadListener){
 
+
     }
     /**
      * Barbers
