@@ -25,7 +25,7 @@ public class ActivityManageSchedule extends AppCompatActivity{
     private CheckBox[] checkBoxes;
     private FirebaseInteraction firebase;
     private FirebaseAuth mAuth;
-    private Calendar scheduleDate; // date to edit
+    private Calendar scheduleDate;
     private TimeSlot[] timeSlots;
 
     @Override
@@ -67,7 +67,6 @@ public class ActivityManageSchedule extends AppCompatActivity{
     }
 
     public void onClickSelectDate(View view) {
-
         int initYear = Calendar.getInstance().get(Calendar.YEAR);
         int initMonth = Calendar.getInstance().get(Calendar.MONTH);
         int initDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
@@ -80,7 +79,7 @@ public class ActivityManageSchedule extends AppCompatActivity{
                 SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM dd");
                 e.setText(sdf.format(calendar.getTime()));
                 scheduleDate = calendar;
-                populateCheckBoxs();
+                populateCheckBoxes();
             }
         }, initYear, initMonth, initDay);
 
@@ -90,19 +89,84 @@ public class ActivityManageSchedule extends AppCompatActivity{
         maxDate.set(Calendar.YEAR, 2018);
         maxDate.set(Calendar.MONTH, 11);
         maxDate.set(Calendar.DAY_OF_MONTH, 31);
+
         datePickerDialog.getDatePicker().setMaxDate(maxDate.getTimeInMillis());
         datePickerDialog.show();
     }
 
-    private void populateCheckBoxs() {
+    public void onClickCheckBox(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
+        TimeSlot timeSlot;
+
+        switch(view.getId()) {
+            case R.id.schedule_checkbox0:
+                timeSlot = timeSlots[0]; break;
+            case R.id.schedule_checkbox1:
+                timeSlot = timeSlots[1]; break;
+            case R.id.schedule_checkbox2:
+                timeSlot = timeSlots[2]; break;
+            case R.id.schedule_checkbox3:
+                timeSlot = timeSlots[3]; break;
+            case R.id.schedule_checkbox4:
+                timeSlot = timeSlots[4]; break;
+            case R.id.schedule_checkbox5:
+                timeSlot = timeSlots[5]; break;
+            case R.id.schedule_checkbox6:
+                timeSlot = timeSlots[6]; break;
+            case R.id.schedule_checkbox7:
+                timeSlot = timeSlots[7]; break;
+            case R.id.schedule_checkbox8:
+                timeSlot = timeSlots[8]; break;
+            case R.id.schedule_checkbox9:
+                timeSlot = timeSlots[9]; break;
+            case R.id.schedule_checkbox10:
+                timeSlot = timeSlots[10]; break;
+            case R.id.schedule_checkbox11:
+                timeSlot = timeSlots[11]; break;
+            case R.id.schedule_checkbox12:
+                timeSlot = timeSlots[12]; break;
+            case R.id.schedule_checkbox13:
+                timeSlot = timeSlots[13]; break;
+            case R.id.schedule_checkbox14:
+                timeSlot = timeSlots[14]; break;
+            default:
+                timeSlot = timeSlots[15]; break;
+        }
+
+        if (checked) {
+            timeSlot.setUnavailable(false);
+        } else {
+            timeSlot.setUnavailable(true);
+        }
+    }
+
+    public void onClickSubmit(View view) {
+        clearCheckBoxes();
+
+        for (int i = 0; i < 16; i++) {
+            TimeSlot t = timeSlots[i];
+
+            if (t.isUnavailable() && t.isBooked()) {
+                t.setBooked(false);
+                t.setAppointment(null);
+            }
+
+            firebase.writeTimeslot(t, mAuth.getUid());
+        }
+
+        this.onStart();
+    }
+
+    private void populateCheckBoxes() {
         clearCheckBoxes();
         for (CheckBox c : checkBoxes) c.setEnabled(true);
 
+        String UID = mAuth.getUid();
         String month = Integer.toString(scheduleDate.get(Calendar.MONTH) + 1);
         String day = Integer.toString(scheduleDate.get(Calendar.DAY_OF_MONTH));
 
-        String UID = mAuth.getUid();
         String path = "Barbers/" + UID + "/" + month + "/" + day;
+
         firebase.read(path, new FirebaseReadListener() {
             @Override
             public void onSuccess(DataSnapshot data) {
@@ -124,82 +188,6 @@ public class ActivityManageSchedule extends AppCompatActivity{
         });
 
         findViewById(R.id.schedule_button_submit).setEnabled(true);
-    }
-
-    public void onClickCheckBox(View view) {
-        boolean checked = ((CheckBox) view).isChecked();
-        TimeSlot timeSlot;
-
-        switch(view.getId()) {
-            case R.id.schedule_checkbox0:
-                timeSlot = timeSlots[0];
-                break;
-            case R.id.schedule_checkbox1:
-                timeSlot = timeSlots[1];
-                break;
-            case R.id.schedule_checkbox2:
-                timeSlot = timeSlots[2];
-                break;
-            case R.id.schedule_checkbox3:
-                timeSlot = timeSlots[3];
-                break;
-            case R.id.schedule_checkbox4:
-                timeSlot = timeSlots[4];
-                break;
-            case R.id.schedule_checkbox5:
-                timeSlot = timeSlots[5];
-                break;
-            case R.id.schedule_checkbox6:
-                timeSlot = timeSlots[6];
-                break;
-            case R.id.schedule_checkbox7:
-                timeSlot = timeSlots[7];
-                break;
-            case R.id.schedule_checkbox8:
-                timeSlot = timeSlots[8];
-                break;
-            case R.id.schedule_checkbox9:
-                timeSlot = timeSlots[9];
-                break;
-            case R.id.schedule_checkbox10:
-                timeSlot = timeSlots[10];
-                break;
-            case R.id.schedule_checkbox11:
-                timeSlot = timeSlots[11];
-                break;
-            case R.id.schedule_checkbox12:
-                timeSlot = timeSlots[12];
-                break;
-            case R.id.schedule_checkbox13:
-                timeSlot = timeSlots[13];
-                break;
-            case R.id.schedule_checkbox14:
-                timeSlot = timeSlots[14];
-                break;
-            default:
-                timeSlot = timeSlots[15];
-                break;
-        }
-
-        if (checked) {
-            timeSlot.setUnavailable(false);
-        } else {
-            timeSlot.setUnavailable(true);
-        }
-    }
-
-    public void onClickSubmit(View view) {
-
-        clearCheckBoxes();
-        for (int i = 0; i < 16; i++) {
-            TimeSlot t = timeSlots[i];
-            if (t.isUnavailable() && t.isBooked()) {
-                t.setBooked(false);
-                t.setAppointment(null);
-            }
-            firebase.writeTimeslot(t, mAuth.getUid());
-        }
-        this.onStart();
     }
     
     private void clearCheckBoxes() {

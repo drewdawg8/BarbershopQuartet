@@ -50,6 +50,7 @@ public class ActivityBarberSelectAppointment extends AppCompatActivity {
         int initYear = Calendar.getInstance().get(Calendar.YEAR);
         int initMonth = Calendar.getInstance().get(Calendar.MONTH);
         int initDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+
         DatePickerDialog datePickerDialog = new DatePickerDialog(view.getContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int y, int m, int d) {
@@ -70,6 +71,7 @@ public class ActivityBarberSelectAppointment extends AppCompatActivity {
         maxDate.set(Calendar.YEAR, 2018);
         maxDate.set(Calendar.MONTH, 11);
         maxDate.set(Calendar.DAY_OF_MONTH, 31);
+
         datePickerDialog.getDatePicker().setMaxDate(maxDate.getTimeInMillis());
         datePickerDialog.show();
     }
@@ -102,7 +104,6 @@ public class ActivityBarberSelectAppointment extends AppCompatActivity {
 
             @Override
             public void onFailure() {
-
             }
         });
     }
