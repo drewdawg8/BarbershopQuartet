@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,9 +18,6 @@ import com.doublea.barbershopquartet.BackgroundTools.FirebaseReadListener;
 import com.doublea.barbershopquartet.BackgroundTools.TimeSlot;
 import com.google.firebase.database.DataSnapshot;
 
-import java.sql.Array;
-import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -206,7 +202,7 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
           /*  String currentTime = new SimpleDateFormat("HH mm").format(Calendar.getInstance().getTime());
             String [] cTime = currentTime.split(" ");
             String [] tTime = timeSlot.toString().split(":");*/
-            if(!timeSlot.isBooked() && !timeSlot.isUnavailable())
+            if(!timeSlot.isBooked() && !timeSlot.isUnavailable() && isSufficientlyAfterCurrentTime(timeSlot))
                 datesOfTimeSlots.add(timeSlot.toString());
         }
 
@@ -215,6 +211,34 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+    }
+
+    private boolean isSufficientlyAfterCurrentTime(TimeSlot timeSlot) {
+
+        Calendar currentTime = Calendar.getInstance();
+
+        int month = Integer.parseInt(timeSlot.getMonth()) - 1;
+        int day = Integer.parseInt(timeSlot.getDay());
+
+        if (month == currentTime.get(Calendar.MONTH) && day == currentTime.get(Calendar.DAY_OF_MONTH)) {
+
+            int hour = Integer.parseInt(timeSlot.getHour());
+            int minute = Integer.parseInt(timeSlot.getMinute());
+
+            int currentHour = currentTime.get(Calendar.HOUR);
+
+            if (currentTime.get(Calendar.AM_PM) == Calendar.PM && currentHour < 12) currentHour += 12;
+
+            if (hour > currentHour) {
+                return true;
+            } else if (hour == currentHour) {
+                int currentMinute = currentTime.get(Calendar.MINUTE);
+                if (minute - currentMinute < 20) return false;
+                else return true;
+            } else return false;
+        } else {
+            return true;
+        }
     }
 
     private TimeSlot extractTimeSlot(DataSnapshot timeSlot) {

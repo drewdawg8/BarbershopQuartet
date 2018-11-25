@@ -26,9 +26,8 @@ public class ActivityBarberSelectAppointment extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseInteraction firebase;
-
     private Calendar appointmentDate;
-    TimeSlot[] timeSlots;
+    private TimeSlot[] timeSlots;
 
     protected static TimeSlot selectedTimeSlot;
 
