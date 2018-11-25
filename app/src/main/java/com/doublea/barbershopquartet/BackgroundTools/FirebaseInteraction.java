@@ -101,15 +101,6 @@ public class FirebaseInteraction {
     }
 
     /**
-     * @TODO Implement download component
-     * @param url
-     * @param downloadListener
-     */
-    public void downloadFile(String url, FileDownloadListener downloadListener){
-
-
-    }
-    /**
      * Barbers
      * @param value object to be written
      */

@@ -73,13 +73,12 @@
                     android:id="@+id/edit_text_notes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="4"
                     android:text="Notes" />
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_weight="5"/>
+                    android:id="@+id/appointment_iv_haircut_picture"/>
             </LinearLayout>
         </ScrollView>
         <Button

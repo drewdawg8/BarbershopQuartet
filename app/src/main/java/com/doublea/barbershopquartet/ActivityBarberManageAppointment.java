@@ -1,22 +1,30 @@
 package com.doublea.barbershopquartet;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.doublea.barbershopquartet.BackgroundTools.FirebaseInteraction;
 import com.doublea.barbershopquartet.BackgroundTools.TimeSlot;
 import com.google.firebase.auth.FirebaseAuth;
 
-import static com.doublea.barbershopquartet.ActivityCustomerAppointmentRequest.timeSlot;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class ActivityBarberManageAppointment extends AppCompatActivity {
 
     private TimeSlot localTimeSlot = ActivityBarberSelectAppointment.selectedTimeSlot;
     private FirebaseInteraction firebaseInteraction;
+    private ImageView haircutPicture;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +37,41 @@ public class ActivityBarberManageAppointment extends AppCompatActivity {
         super.onStart();
         initializeInformation();
         firebaseInteraction = new FirebaseInteraction();
+        /**
+         * Stack overflow, URL: https://stackoverflow.com/questions/5776851/load-image-from-url
+         */
+        new DownloadImageTask((ImageView) findViewById(R.id.appointment_iv_haircut_picture))
+                .execute(localTimeSlot.getAppointment().getURL());
+    }
+
+
+    /**
+     * Okay I really love stack overflow:
+     * URL: https://stackoverflow.com/questions/5776851/load-image-from-url
+     */
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
     }
 
     public void onClickRemoveAppointment(View view) {
@@ -49,5 +92,6 @@ public class ActivityBarberManageAppointment extends AppCompatActivity {
         textView.setText(ActivityBarberSelectAppointment.selectedTimeSlot.toString());
         textView = (TextView)findViewById(R.id.edit_text_notes);
         textView.setText(ActivityBarberSelectAppointment.selectedTimeSlot.getAppointment().getNotes());
+        haircutPicture = (ImageView) findViewById(R.id.appointment_iv_haircut_picture);
     }
 }
