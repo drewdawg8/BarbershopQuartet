@@ -33,7 +33,9 @@ public class ActivityBarberRegister extends AppCompatActivity {
     private EditText password;
     private EditText confirmPassWord;
     private EditText description;
+    private EditText adminPassword;
     private FirebaseInteraction firebase;
+    private int chances;
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +63,10 @@ public class ActivityBarberRegister extends AppCompatActivity {
         password = findViewById(R.id.register_edit_text_password);
         confirmPassWord = findViewById(R.id.register_edit_text_confirm_password);
         description = findViewById(R.id.register_edit_text_description);
+        adminPassword = findViewById(R.id.register_edit_text_admin_password);
         firebase = new FirebaseInteraction();
         mAuth = FirebaseAuth.getInstance();
+        chances = 3;
     }
 
     /**
@@ -127,9 +131,25 @@ public class ActivityBarberRegister extends AppCompatActivity {
 
     private boolean validInputs() {
         boolean valid = true;
+        if (!correctAdminPassword()) valid = false;
         if (!checkEmptyTextboxes()) valid = false;
         if (!checkPasswordMatch()) valid = false;
         return valid;
+    }
+    private boolean correctAdminPassword() {
+        String adminPass = adminPassword.getText().toString();
+        if(!adminPass.equals("iwillshaveyoulikeagoat")){
+            chances--;
+            Toast.makeText(ActivityBarberRegister.this, "Wrong admin password!!! you have " + chances + " more chances!",
+                    Toast.LENGTH_SHORT).show();
+            if (chances == 0){
+                Toast.makeText(ActivityBarberRegister.this, "Wrong!, Please see our support team!",
+                        Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this,ActivityMain.class));
+            }
+            return false;
+        }
+        return true;
     }
 
     private boolean checkPasswordMatch() {
