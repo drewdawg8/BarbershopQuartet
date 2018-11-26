@@ -22,9 +22,9 @@ import java.util.Calendar;
 
 public class ActivityManageSchedule extends AppCompatActivity{
 
-    private CheckBox[] checkBoxes;
     private FirebaseInteraction firebase;
     private FirebaseAuth mAuth;
+    private CheckBox[] checkBoxes;
     private Calendar scheduleDate;
     private TimeSlot[] timeSlots;
 
@@ -66,6 +66,12 @@ public class ActivityManageSchedule extends AppCompatActivity{
         timeSlots = new TimeSlot[16];
     }
 
+    /**
+     * Called when the user hits the "Select Date" button.
+     * Creates a DatePickerDialog and displays it to the user
+     *
+     * @param view The View that called this method
+     */
     public void onClickSelectDate(View view) {
         int initYear = Calendar.getInstance().get(Calendar.YEAR);
         int initMonth = Calendar.getInstance().get(Calendar.MONTH);
@@ -94,6 +100,11 @@ public class ActivityManageSchedule extends AppCompatActivity{
         datePickerDialog.show();
     }
 
+    /**
+     * Called when the user clicks a checkbox
+     * 
+     * @param view The View that called this method
+     */
     public void onClickCheckBox(View view) {
         boolean checked = ((CheckBox) view).isChecked();
         TimeSlot timeSlot;
