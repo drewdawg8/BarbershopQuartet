@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.doublea.barbershopquartet.BackgroundTools.Appointment;
 import com.doublea.barbershopquartet.BackgroundTools.Customer;
@@ -43,27 +44,31 @@ public class ActivityCustomerFillOutAppointment extends AppCompatActivity {
     private boolean initializeAndCheckAppointmentValues(){
         boolean entered = true;
         EditText edit = (EditText)findViewById(R.id.edit_text_first_name);
-        if(edit.getText().toString().equals("")){
+        if(edit.getText().toString().equals("") || edit.getText().toString().length() >= 20){
             entered = false;
            edit.setHintTextColor(Color.RED);
+            Toast.makeText(ActivityCustomerFillOutAppointment.this, "Make sure your input is between 1 and 20 characters", Toast.LENGTH_SHORT).show();
         }
         customer.setFirstName(edit.getText().toString());
         edit = (EditText)findViewById(R.id.edit_text_last_name);
-        if(edit.getText().toString().equals("")){
+        if(edit.getText().toString().equals("")  || edit.getText().toString().length() >= 20){
             entered = false;
             edit.setHintTextColor(Color.RED);
+            Toast.makeText(ActivityCustomerFillOutAppointment.this, "Make sure your input is between 1 and 20 characters", Toast.LENGTH_SHORT).show();
         }
         customer.setLastName(edit.getText().toString());
         edit = (EditText)findViewById(R.id.edit_text_email);
-        if(edit.getText().toString().equals("")){
+        if(edit.getText().toString().equals("")  || edit.getText().toString().length() >= 20){
             entered = false;
             edit.setHintTextColor(Color.RED);
+            Toast.makeText(ActivityCustomerFillOutAppointment.this, "Make sure your input is between 1 and 20 characters", Toast.LENGTH_SHORT).show();
         }
         customer.setEmail(edit.getText().toString());
         edit = (EditText)findViewById(R.id.edit_text_phone_number);
-        if(edit.getText().toString().equals("")){
+        if(edit.getText().toString().equals("")  || edit.getText().toString().length() >= 20 ){
             entered = false;
             edit.setHintTextColor(Color.RED);
+            Toast.makeText(ActivityCustomerFillOutAppointment.this, "Make sure your input is between 1 and 20 characters", Toast.LENGTH_SHORT).show();
         }
         customer.setPhoneNumber(edit.getText().toString());
         edit = (EditText)findViewById(R.id.edit_text_notes);
