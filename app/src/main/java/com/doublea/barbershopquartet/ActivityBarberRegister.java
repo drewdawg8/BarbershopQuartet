@@ -37,7 +37,7 @@ public class ActivityBarberRegister extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barber_register);
         initializeVariables();
-        testInputs();
+        //testInputs();
     }
 
     private void testInputs() {
@@ -133,7 +133,7 @@ public class ActivityBarberRegister extends AppCompatActivity {
     }
     private boolean correctAdminPassword() {
         String adminPass = adminPassword.getText().toString();
-        if(!adminPass.equals("iwillshaveyoulikeagoat")){
+        if(!adminPass.equals("shaveyougoat")){
             chances--;
             Toast.makeText(ActivityBarberRegister.this, "Wrong admin password!!! you have " + chances + " more chances!",
                     Toast.LENGTH_SHORT).show();
