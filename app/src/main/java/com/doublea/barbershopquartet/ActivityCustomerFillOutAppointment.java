@@ -5,19 +5,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
 import com.doublea.barbershopquartet.BackgroundTools.Appointment;
-import com.doublea.barbershopquartet.BackgroundTools.Barber;
 import com.doublea.barbershopquartet.BackgroundTools.Customer;
 import com.doublea.barbershopquartet.BackgroundTools.FileUploadListener;
 import com.doublea.barbershopquartet.BackgroundTools.FirebaseInteraction;
-import com.doublea.barbershopquartet.BackgroundTools.TimeSlot;
 
 import static com.doublea.barbershopquartet.ActivityCustomerAppointmentRequest.barber;
 import static com.doublea.barbershopquartet.ActivityCustomerAppointmentRequest.timeSlot;

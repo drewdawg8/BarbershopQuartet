@@ -14,8 +14,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.File;
-
 public class FirebaseInteraction {
     private FirebaseDatabase database;
     private StorageReference storageRef;

@@ -1,6 +1,5 @@
 package com.doublea.barbershopquartet.BackgroundTools;
 
-import java.sql.Time;
 import java.util.ArrayList;
 
 public class Barber extends User {
