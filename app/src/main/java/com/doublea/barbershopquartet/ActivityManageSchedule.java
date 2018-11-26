@@ -76,6 +76,7 @@ public class ActivityManageSchedule extends AppCompatActivity{
         int initYear = Calendar.getInstance().get(Calendar.YEAR);
         int initMonth = Calendar.getInstance().get(Calendar.MONTH);
         int initDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+
         DatePickerDialog datePickerDialog = new DatePickerDialog(view.getContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int y, int m, int d) {
@@ -102,7 +103,10 @@ public class ActivityManageSchedule extends AppCompatActivity{
 
     /**
      * Called when the user clicks a checkbox
-     * 
+     * Updates the isUnavailable attribute of the TimeSlot object corresponding to the checkbox
+     * checked: isUnavailable = false
+     * unchecked: isUnavailable = true
+     *
      * @param view The View that called this method
      */
     public void onClickCheckBox(View view) {
@@ -151,6 +155,13 @@ public class ActivityManageSchedule extends AppCompatActivity{
         }
     }
 
+    /**
+     * Called when the user clicks the submit button
+     * The updated TimeSlot objects are written back to the database
+     * If a booked TimeSlot is made unavailable, the Appointment is deleted
+     *
+     * @param view The View that called this method
+     */
     public void onClickSubmit(View view) {
         clearCheckBoxes();
 
@@ -168,6 +179,11 @@ public class ActivityManageSchedule extends AppCompatActivity{
         this.onStart();
     }
 
+    /**
+     * Loads the TimeSlots for the selected date, and checks/unchecks the checkboxes appropriately
+     * Enables the checkboxes for the user
+     * Enables the submit button
+     */
     private void populateCheckBoxes() {
         clearCheckBoxes();
         for (CheckBox c : checkBoxes) c.setEnabled(true);
@@ -200,11 +216,21 @@ public class ActivityManageSchedule extends AppCompatActivity{
 
         findViewById(R.id.schedule_button_submit).setEnabled(true);
     }
-    
+
+    /**
+     * Unchecks all the checkboxes
+     */
     private void clearCheckBoxes() {
         for (CheckBox c : checkBoxes) c.setChecked(false);
     }
 
+    /**
+     * Extracts information from a Firebase Datasnapshot object and stores it in a new TimeSlot object
+     * Called by populateCheckBoxes method
+     *
+     * @param timeSlot Firebase Datasnapshot containing TimeSlot information
+     * @return new TimeSlot object
+     */
     private TimeSlot extractTimeSlot(DataSnapshot timeSlot) {
         return new TimeSlot(timeSlot.child("month").getValue().toString(),
                 timeSlot.child("day").getValue().toString(), timeSlot.child("hour").getValue().toString(),
@@ -212,10 +238,24 @@ public class ActivityManageSchedule extends AppCompatActivity{
                 (boolean)timeSlot.child("unavailable").getValue());
     }
 
+    /**
+     * Extracts information from a Firebase Datasnapshot containing Appointment information
+     * Called by extractTimeSlot method
+     *
+     * @param appointment Firebase Datasnapshot containing Appointment information
+     * @return new Appointment object
+     */
     private Appointment extractAppointment(DataSnapshot appointment) {
         return (appointment.getValue() == null)?null:new Appointment(appointment.child("notes").getValue().toString(),appointment.child("url").getValue().toString(),extractCustomer(appointment.child("customer")));
     }
 
+    /**
+     * Extracts information from a Firebase Datasnapshot contatining Customer information
+     * Called by extractAppointment method
+     *
+     * @param customer Firebase Datasnapshot contatining Customer information
+     * @return new Customer object
+     */
     private Customer extractCustomer(DataSnapshot customer) {
         return new Customer(customer.child("firstName").getValue().toString(), customer.child("lastName").getValue().toString(), customer.child("phoneNumber").getValue().toString(), customer.child("email").getValue().toString());
     }
