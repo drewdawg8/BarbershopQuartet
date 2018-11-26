@@ -22,13 +22,21 @@ public class ActivityBarberManageAppointment extends AppCompatActivity {
     private TimeSlot localTimeSlot = ActivityBarberSelectAppointment.selectedTimeSlot;
     private FirebaseInteraction firebaseInteraction;
     private ImageView haircutPicture;
+
+    /**
+     * Method triggerd on initialization of Activity.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barber_manage_appointment);
     }
 
-
+    /**
+     * Method to override the onStart method of the activity. Here, we initialize the
+     * the class variables.
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -71,6 +79,10 @@ public class ActivityBarberManageAppointment extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method to handle removing an appointment from Barber schedules.
+     * @param view
+     */
     public void onClickRemoveAppointment(View view) {
         TimeSlot slot = new TimeSlot(localTimeSlot.getMonth(), localTimeSlot.getDay(), localTimeSlot.getHour(),
                 localTimeSlot.getMinute(), null);
@@ -78,7 +90,10 @@ public class ActivityBarberManageAppointment extends AppCompatActivity {
         startActivity(new Intent(this,ActivityBarberSelectAppointment.class));
     }
 
-    public void initializeInformation(){
+    /**
+     * Helper method to grab all the TextViews and initialize their values.
+     */
+    private void initializeInformation(){
         TextView textView = (TextView)findViewById(R.id.edit_text_name);
         textView.setText(ActivityBarberSelectAppointment.selectedTimeSlot.getAppointment().getCustomer().toString());
         textView = (TextView)findViewById(R.id.edit_text_email);
