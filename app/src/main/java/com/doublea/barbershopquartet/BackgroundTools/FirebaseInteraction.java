@@ -110,8 +110,9 @@ public class FirebaseInteraction {
     }
 
     /**
-     * @TODO implement time slot map function
      * @param timeSlot
+     * @param barber
+     * writes the timeslot to the database
      */
     public void writeTimeslot(TimeSlot timeSlot, Barber barber){
         String path = "Barbers/" + barber.getUid() + "/" + timeSlot.getMonth() + "/" + timeSlot.getDay() + "/" +
