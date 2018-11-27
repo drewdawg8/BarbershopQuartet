@@ -28,6 +28,10 @@ public class ActivityManageSchedule extends AppCompatActivity{
     private Calendar scheduleDate;
     private TimeSlot[] timeSlots;
 
+    /**
+     * Method triggered on start of Activity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +59,9 @@ public class ActivityManageSchedule extends AppCompatActivity{
         mAuth = FirebaseAuth.getInstance();
     }
 
+    /**
+     * Method to override the onStart method
+     */
     @Override
     public void onStart() {
         super.onStart();
