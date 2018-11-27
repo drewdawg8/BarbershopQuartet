@@ -29,6 +29,10 @@ public class ActivityCustomerFillOutAppointment extends AppCompatActivity {
     private String url;
     private Button reserve;
 
+    /**
+     * Method triggered on create of Activity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +40,9 @@ public class ActivityCustomerFillOutAppointment extends AppCompatActivity {
         initializeVariables();
     }
 
-
+    /**
+     * Method to initialize variables from class.
+     */
     private void initializeVariables(){
         appointment = new Appointment(null, null, null);
         customer = new Customer(null, null, null, null);
@@ -44,6 +50,11 @@ public class ActivityCustomerFillOutAppointment extends AppCompatActivity {
         url = "";
     }
 
+    /**
+     * Method to Initialize and create and Appointment object using the Customer information
+     * and image and notes.
+     * @return True if customer entered all the necessary information, false otherwise.
+     */
     private boolean initializeAndCheckAppointmentValues(){
         boolean entered = true;
         EditText edit = (EditText)findViewById(R.id.edit_text_first_name);
@@ -81,6 +92,10 @@ public class ActivityCustomerFillOutAppointment extends AppCompatActivity {
         return entered;
     }
 
+    /**
+     * Method to handle user clicking reserve appointment.
+     * @param view
+     */
     public void onClickReserveAppointment(View view) {
         if(initializeAndCheckAppointmentValues()){
             // send TimeSlot with appointment and image information
@@ -91,6 +106,9 @@ public class ActivityCustomerFillOutAppointment extends AppCompatActivity {
 
     }
 
+    /**
+     * Method to initialize a TimeSlot object and save it to database with new Appointment.
+     */
     private void initialzeTimeSlotAndSendToFirebase() {
         timeSlot.setAppointment(appointment);
         timeSlot.setBooked(true);
@@ -98,7 +116,10 @@ public class ActivityCustomerFillOutAppointment extends AppCompatActivity {
         firebaseInteraction.writeTimeslot(timeSlot, barber);
     }
 
-
+    /**
+     * Method to handle user uploading a photo to database.
+     * @param view
+     */
     public void onClickUploadPhoto(View view) {
         performFileSearch();
         // set the class variable url to obtained URL
