@@ -58,6 +58,7 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
         barber = new Barber(null, null, null, null, null);
         timeSlot = new TimeSlot(null, null, null, null, null);
         this.stages = 0;
+        Toast.makeText(ActivityCustomerAppointmentRequest.this,"Loading Barbers from database",Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -114,6 +115,7 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        Toast.makeText(ActivityCustomerAppointmentRequest.this,"Barbers loaded",Toast.LENGTH_SHORT).show();
     }
 
     /**

@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.doublea.barbershopquartet.BackgroundTools.Appointment;
 import com.doublea.barbershopquartet.BackgroundTools.Customer;
