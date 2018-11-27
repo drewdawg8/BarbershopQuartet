@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class ActivityCustomerFillOutAppointment extends AppCompatActivity {
     private Appointment appointment;
     private Customer customer;
     private String url;
+    private Button reserve;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class ActivityCustomerFillOutAppointment extends AppCompatActivity {
     private void initializeVariables(){
         appointment = new Appointment(null, null, null);
         customer = new Customer(null, null, null, null);
+        reserve = (Button) findViewById(R.id.button_reserve_appointment);
         url = "";
     }
 
@@ -110,7 +113,7 @@ public class ActivityCustomerFillOutAppointment extends AppCompatActivity {
         // ACTION_OPEN_DOCUMENT is the intent to choose a file via the system's file
         // browser.
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-
+        reserve.setEnabled(false);
         // Filter to only show results that can be "opened", such as a
         // file (as opposed to a list of contacts or timezones)
         intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -144,18 +147,23 @@ public class ActivityCustomerFillOutAppointment extends AppCompatActivity {
             // Instead, a URI to that document will be contained in the return intent
             // provided to this method as a parameter.
             // Pull that URI using resultData.getData().
+
             Uri uri = null;
+            Toast.makeText(ActivityCustomerFillOutAppointment.this, "Picture Chosen", Toast.LENGTH_SHORT).show();
             if (resultData != null) {
                 uri = resultData.getData();
                 firebaseInteraction.uploadFile(uri, new FileUploadListener() {
                     @Override
                     public void onSuccess(String newUrl) {
+                        Toast.makeText(ActivityCustomerFillOutAppointment.this, "Upload successful", Toast.LENGTH_SHORT).show();
                         url = newUrl;
+                        reserve.setEnabled(true);
                     }
 
                     @Override
                     public void onFailure() {
-
+                        Toast.makeText(ActivityCustomerFillOutAppointment.this, "Upload Failed", Toast.LENGTH_SHORT).show();
+                        reserve.setEnabled(true);
                     }
                 });
 
