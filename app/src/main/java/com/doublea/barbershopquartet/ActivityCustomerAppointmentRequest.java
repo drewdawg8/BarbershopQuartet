@@ -86,6 +86,8 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
 
     /**
      * Method that Empties the spinners by placing an empty array in the spinner.
+     *
+     * Borrowed from https://stackoverflow.com/questions/17311335/how-to-populate-a-spinner-from-string-array
      */
     private void emptySpiner() {
         ArrayList<String> list = new ArrayList<String>();
@@ -98,6 +100,8 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
 
     /**
      * Helper method that populates the Spinner with Barbers for user to choose from.
+     *
+     * Borrowed from https://stackoverflow.com/questions/17311335/how-to-populate-a-spinner-from-string-array
      */
     private void populateFirstSpinner() {
         barberNames = new ArrayList<String>();
@@ -177,6 +181,10 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
     /**
      * Method that gets the date from the user using the Calendar API. It stores the user selection,
      * and using that selection and the Barber selection, the TimeSlots are loaded from the database.
+     *
+     * Borrowed from https://stackoverflow.com/a/39916305
+     * and https://developer.android.com/reference/android/app/DatePickerDialog
+     *
      * @param view
      */
     private void getDate(View view) {
@@ -236,6 +244,9 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
     /**
      * Method to load the Spinner with the TimeSlots with the give listOfTimeSlots. Only
      * shows available and not booked TimeSlots.
+     *
+     * Borrowed from https://stackoverflow.com/questions/17311335/how-to-populate-a-spinner-from-string-array
+     *
      * @param listOfTimeSlots ArrayList with all the TimeSlots that the customer can book.
      */
     private void loadSpinnerWithTimeSlots(ArrayList<TimeSlot> listOfTimeSlots) {

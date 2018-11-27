@@ -77,6 +77,9 @@ public class ActivityManageSchedule extends AppCompatActivity{
      * Called when the user hits the "Select Date" button.
      * Creates a DatePickerDialog and displays it to the user
      *
+     * Borrowed from https://stackoverflow.com/a/39916305
+     * and https://developer.android.com/reference/android/app/DatePickerDialog
+     *
      * @param view The View that called this method
      */
     public void onClickSelectDate(View view) {

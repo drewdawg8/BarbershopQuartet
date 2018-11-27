@@ -54,7 +54,19 @@ public class ActivityBarberSelectAppointment extends AppCompatActivity {
     }
 
     /**
+     * Assures that pressing back returns to barber menu
+     */
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, ActivityBarberMenu.class));
+    }
+
+    /**
      * Method to handle the user selecting SelectDate to choose Appointments from.
+     *
+     * Borrowed from https://stackoverflow.com/a/39916305
+     * and https://developer.android.com/reference/android/app/DatePickerDialog
+     *
      * @param view
      */
     public void onClickSelectDate(View view) {
@@ -162,6 +174,8 @@ public class ActivityBarberSelectAppointment extends AppCompatActivity {
     /**
      * Method to populate the spinner with Appointments for barber to view. It only populates that
      * are available and booked by a customer.
+     *
+     * Borrowed from https://stackoverflow.com/questions/17311335/how-to-populate-a-spinner-from-string-array
      */
     private void populateSpinner() {
         Spinner spinner = findViewById(R.id.select_appointment_spinner);
