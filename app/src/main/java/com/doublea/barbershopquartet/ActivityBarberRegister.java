@@ -35,6 +35,11 @@ public class ActivityBarberRegister extends AppCompatActivity {
     private FirebaseInteraction firebase;
     private int chances;
     private FirebaseAuth mAuth;
+
+    /**
+     * Method triggered on the initialization of the Activity.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,16 +48,10 @@ public class ActivityBarberRegister extends AppCompatActivity {
         //testInputs();
     }
 
-    private void testInputs() {
-        firstName.setText("Ahmed");
-        lastName.setText("Ali");
-        phoneNumber.setText("7037636929");
-        email.setText("ahmedhhw2@gmail.com");
-        password.setText("ahmedmo");
-        confirmPassWord.setText("ahmedmo");
-        description.setText("I will shave you like my goat");
-    }
-
+    /**
+     * Helper method initialize all the class variables to get information from the
+     * textboxes.
+     */
     private void initializeVariables() {
         firstName = findViewById(R.id.register_edit_text_first_name);
         lastName = findViewById(R.id.register_edit_text_last_name);
@@ -68,6 +67,7 @@ public class ActivityBarberRegister extends AppCompatActivity {
     }
 
     /**
+     * Method to handle user clicking register, ensuring user entered valid inputs.
      * @param view
      */
     public void onClickRegister(View view) {
@@ -76,6 +76,12 @@ public class ActivityBarberRegister extends AppCompatActivity {
         registerBarber(email.getText().toString(),password.getText().toString());
     }
 
+    /**
+     * Method that registers barber using the barber email and password. Communicates
+     * with database.
+     * @param email Email of the new barber.
+     * @param password password of the new Barber.
+     */
     private void registerBarber(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -95,6 +101,11 @@ public class ActivityBarberRegister extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Method that writes to database the new Barber information, generates TimeSlots for that
+     * barber, and moves to the next Activity.
+     * @param uid
+     */
     private void updateUI(String uid) {
         Barber barber = new Barber(firstName.getText().toString(), lastName.getText().toString(),
                 phoneNumber.getText().toString(), email.getText().toString(),
@@ -104,6 +115,11 @@ public class ActivityBarberRegister extends AppCompatActivity {
         startActivity(new Intent(ActivityBarberRegister.this, ActivityBarberMenu.class));
     }
 
+    /**
+     * Method to generate TimeSlots for a barber in the database. These TimeSlots hold the barber
+     * Appointments.
+     * @param barber Barber that will have TimeSlots generated for.
+     */
     private void generateTimeSlots(Barber barber) {
         Calendar calendar = Calendar.getInstance();
         TimeSlot timeSlot = null;
@@ -126,7 +142,10 @@ public class ActivityBarberRegister extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * Helper method to check that information entered is valid.
+     * @return True if information is valid, false otherwise.
+     */
     private boolean validInputs() {
         boolean valid = true;
         if (!correctAdminPassword()) valid = false;
@@ -134,6 +153,12 @@ public class ActivityBarberRegister extends AppCompatActivity {
         if (!checkPasswordMatch()) valid = false;
         return valid;
     }
+
+    /**
+     * Method that checks if the Barber registering is allowed to register as a barber. Checks the
+     * admin password.
+     * @return True if the barber is allowed to register, false otherwise.
+     */
     private boolean correctAdminPassword() {
         String adminPass = adminPassword.getText().toString();
         if(!adminPass.equals("shaveyougoat")){
@@ -150,6 +175,10 @@ public class ActivityBarberRegister extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Method to ensure password entered by user is correct.
+     * @return True if password is accurate, false otherwise.
+     */
     private boolean checkPasswordMatch() {
         if (password.getText().toString().equals(confirmPassWord.getText().toString()))
             return true;
@@ -158,6 +187,10 @@ public class ActivityBarberRegister extends AppCompatActivity {
             return false;
     }
 
+    /**
+     * Method to check if the any of the textBoxes for necessary information is empty.
+     * @return True if all the text boxes are populated, false if they are not all populated.
+     */
     private boolean checkEmptyTextboxes() {
         boolean valid = true;
         if (!checkEmptyEditText(firstName)) valid = false;
@@ -169,6 +202,12 @@ public class ActivityBarberRegister extends AppCompatActivity {
         if (!checkEmptyEditText(description)) valid =  false;
         return valid;
     }
+
+    /**
+     * Method to check if each EditText is empty
+     * @param element EditText element being checked if empty.
+     * @return True if EditText has values, false if it is empty.
+     */
     private boolean checkEmptyEditText(EditText element){
         if (element.getText().toString().equals("")){
             element.setBackgroundResource(R.drawable.background_error_txt_box);
@@ -178,6 +217,10 @@ public class ActivityBarberRegister extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Method to handle user clicking Log in.
+     * @param view
+     */
     public void onClickswitchToLogIn(View view) {
         startActivity(new Intent(this, ActivityBarberLogin.class));
 
