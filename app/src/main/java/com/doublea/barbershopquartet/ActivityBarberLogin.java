@@ -22,6 +22,10 @@ public class ActivityBarberLogin extends AppCompatActivity {
     private FirebaseInteraction firebase;
     private FirebaseAuth mAuth;
 
+    /**
+     * Method triggered on start of the Activity. The class variables are initialized
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +36,19 @@ public class ActivityBarberLogin extends AppCompatActivity {
         firebase = new FirebaseInteraction();
         mAuth = FirebaseAuth.getInstance();
     }
+
+    /**
+     * Method to override the onBackPressed() event to prevent user from going back after
+     * loggin out.
+     */
     @Override
     public void onBackPressed() {
         startActivity(new Intent(this, ActivityMain.class));
     }
+
+    /**
+     * Method to override onStart method of ActivtyBatberLogin. Checks if user is signed in already.
+     */
     @Override
     public void onStart() {
         super.onStart();
@@ -44,10 +57,19 @@ public class ActivityBarberLogin extends AppCompatActivity {
         if (mAuth.getCurrentUser() != null)
             updateUI();
     }
+
+    /**
+     * Method to handle the click of register, and enables user to register himself as a barber.
+     * @param view
+     */
     public void onClickSwitchToRegister(View view) {
         startActivity(new Intent(this, ActivityBarberRegister.class));
     }
 
+    /**
+     * Method to handle the login of the barber.
+     * @param view
+     */
     public void onClickLogin(View view) {
         // TODO: Add error checking
         mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -61,6 +83,9 @@ public class ActivityBarberLogin extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method to move to the next Activity.
+     */
     private void updateUI() {
         startActivity(new Intent(this, ActivityBarberMenu.class));
     }
