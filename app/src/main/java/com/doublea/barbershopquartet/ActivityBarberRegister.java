@@ -215,7 +215,7 @@ public class ActivityBarberRegister extends AppCompatActivity {
     }
 
     /**
-     * Method to handle user clicking Log in. 
+     * Method to handle user clicking Log in.
      * @param view
      */
     public void onClickswitchToLogIn(View view) {

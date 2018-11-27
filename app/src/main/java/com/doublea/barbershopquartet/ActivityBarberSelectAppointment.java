@@ -31,6 +31,10 @@ public class ActivityBarberSelectAppointment extends AppCompatActivity {
 
     protected static TimeSlot selectedTimeSlot;
 
+    /**
+     * Methrod triggered on create of Activity.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,12 +44,19 @@ public class ActivityBarberSelectAppointment extends AppCompatActivity {
         firebase = new FirebaseInteraction();
     }
 
+    /**
+     * Method to overrid onStart netgid if activity.
+     */
     @Override
     public void onStart() {
         super.onStart();
         timeSlots = new TimeSlot[16];
     }
 
+    /**
+     *
+     * @param view
+     */
     public void onClickSelectDate(View view) {
         int initYear = Calendar.getInstance().get(Calendar.YEAR);
         int initMonth = Calendar.getInstance().get(Calendar.MONTH);
