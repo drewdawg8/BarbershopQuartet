@@ -9,6 +9,10 @@ import android.view.View;
 
 public class ActivityMain extends AppCompatActivity {
 
+    /**
+     * Method triggered on start of Activity.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,7 +20,11 @@ public class ActivityMain extends AppCompatActivity {
 
     }
 
-
+    /**
+     * Method to handle user Menu.
+     * @param menu
+     * @return True
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -24,6 +32,11 @@ public class ActivityMain extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Method to handle selecting an item from the Menu.
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -39,11 +52,19 @@ public class ActivityMain extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Method to move to Barber login activity if that is selected by user.
+     * @param view
+     */
     public void onClickOpenBarberLogIn(View view) {
         Intent startNewActivity = new Intent(this, ActivityBarberLogin.class);
         startActivity(startNewActivity);
     }
 
+    /**
+     * Method to move to Customer sign up if that is selected by user.
+     * @param view
+     */
     public void onClickCustomerSignUp(View view) {
         Intent startNewActivity = new Intent(this, ActivityCustomerAppointmentRequest.class);
         startActivity(startNewActivity);
