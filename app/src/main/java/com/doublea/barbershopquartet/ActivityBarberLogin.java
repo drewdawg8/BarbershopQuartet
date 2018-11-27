@@ -15,6 +15,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * CLASS HEAVILY BARROWS FROM MY PREVIOUS APP: BINUTTON (Almost an exact copy) - Author: Ahmed Ali
+ */
 public class ActivityBarberLogin extends AppCompatActivity {
 
     private EditText email;
@@ -68,10 +71,10 @@ public class ActivityBarberLogin extends AppCompatActivity {
 
     /**
      * Method to handle the login of the barber.
+     * Code borrowed from Firebase assistant
      * @param view
      */
     public void onClickLogin(View view) {
-        // TODO: Add error checking
         mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

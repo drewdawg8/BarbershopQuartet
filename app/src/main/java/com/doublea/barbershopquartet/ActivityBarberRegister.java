@@ -19,6 +19,9 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Calendar;
 
+/**
+ * CLASS HEAVILY BARROWS FROM MY PREVIOUS APP: BINUTTON (Almost an exact copy) - Author: Ahmed Ali
+ */
 public class ActivityBarberRegister extends AppCompatActivity {
     
     private EditText firstName;
