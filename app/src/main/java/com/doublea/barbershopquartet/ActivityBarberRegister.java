@@ -161,7 +161,7 @@ public class ActivityBarberRegister extends AppCompatActivity {
      */
     private boolean correctAdminPassword() {
         String adminPass = adminPassword.getText().toString();
-        if(!adminPass.equals("shaveyougoat")){
+        if(!adminPass.equals("password")){
             chances--;
             Toast.makeText(ActivityBarberRegister.this, "Wrong admin password!!! you have " + chances + " more chances!",
                     Toast.LENGTH_SHORT).show();
