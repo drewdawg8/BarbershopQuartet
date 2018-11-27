@@ -33,6 +33,11 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
     protected static Barber barber;
     protected static TimeSlot timeSlot;
     private int stages;
+
+    /**
+     * Method triggered on start of activity.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +46,7 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
     }
 
     /**
-     * Initializes all variables
+     * Method that initializes all variables.
      */
     private void intializeVariables() {
         this.spinner = (Spinner)findViewById(R.id.spinner);
@@ -55,6 +60,10 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
         this.stages = 0;
     }
 
+    /**
+     * Method to override the onStart method. It empties the spinner, and reads the barbers
+     * from database and loads them into spinner for user to select from.
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -75,6 +84,9 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method that Empties the spinners by placing an empty array in the spinner.
+     */
     private void emptySpiner() {
         ArrayList<String> list = new ArrayList<String>();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
@@ -84,6 +96,9 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
         spinner.setAdapter(adapter);
     }
 
+    /**
+     * Helper method that populates the Spinner with Barbers for user to choose from.
+     */
     private void populateFirstSpinner() {
         barberNames = new ArrayList<String>();
         for(Barber b : this.listOfBarbers){
@@ -97,12 +112,22 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
         spinner.setAdapter(adapter);
     }
 
+    /**
+     * Method to extract Barbers from the data from database, and loads into Barber object.
+     * @param barber DataSnapshot with barber information.
+     * @return Barber with all the data information.
+     */
     private Barber extractBarber(DataSnapshot barber) {
         return new Barber(barber.child("firstName").getValue().toString(),barber.child("lastName").getValue().toString(),
                 barber.child("phoneNumber").getValue().toString(), barber.child("email").getValue().toString(),
                 barber.child("description").getValue().toString(), barber.child("uid").getValue().toString());
     }
 
+    /**
+     * Method to handle user pressing next, moving them to the next stage from selecting barber,
+     * to selecting date, to Selecting a TimeSlot to book an appointment.
+     * @param view
+     */
     public void onClickNext(View view) {
         switch(stages){
             case 0:
@@ -118,16 +143,19 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
         }
     }
 
-    private void loadTimeSlots() {
-
-    }
-
+    /**
+     * Method to get Selected Barber from the Spinner.
+     */
     private void getSelectedBarber() {
         String name = spinner.getSelectedItem().toString();
         int index = barberNames.indexOf(name);
         barber = listOfBarbers.get(index);
     }
 
+    /**
+     * A Method that gets the TimeSlot from user Selection, and translates it
+     * so that it is converted into the TimeSlot fields for hours and minutes.
+     */
     private void getTimeSlot() {
         String choice = spinner.getSelectedItem().toString();
         String [] array = choice.split(":");
@@ -146,6 +174,11 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
         timeSlot.setMinute(m[0]);
     }
 
+    /**
+     * Method that gets the date from the user using the Calendar API. It stores the user selection,
+     * and using that selection and the Barber selection, the TimeSlots are loaded from the database.
+     * @param view
+     */
     private void getDate(View view) {
         int initYear = Calendar.getInstance().get(Calendar.YEAR);
         int initMonth = Calendar.getInstance().get(Calendar.MONTH);
@@ -177,6 +210,11 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
         datePickerDialog.show();
     }
 
+    /**
+     * Method to populate the Spinner with the TimeSlots from the database.
+     * @param m Month that TimeSlot will be extracted from
+     * @param d Day that TimeSlots will be extracted from.
+     */
     private void populateSpinnerTimeSlots(int m, int d) {
         String path = "Barbers/" + barber.getUid() + "/" + m + "/" + d;
         firebaseInteraction.read(path, new FirebaseReadListener() {
@@ -195,6 +233,11 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method to load the Spinner with the TimeSlots with the give listOfTimeSlots. Only
+     * shows available and not booked TimeSlots.
+     * @param listOfTimeSlots ArrayList with all the TimeSlots that the customer can book.
+     */
     private void loadSpinnerWithTimeSlots(ArrayList<TimeSlot> listOfTimeSlots) {
         ArrayList<String> datesOfTimeSlots = new ArrayList<String>();
         for(TimeSlot timeSlot : listOfTimeSlots){
@@ -213,6 +256,12 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
         spinner.setAdapter(adapter);
     }
 
+    /**
+     * Method to check if the TimeSlot is within the range that is allowed to be booked for the day.
+     * If a TimeSlot is after current time and within sufficient range it is shown to customer.
+     * @param timeSlot TimeSlot to be checked.
+     * @return True if that TimeSlot is within range to show to user, false otherwise.
+     */
     private boolean isSufficientlyAfterCurrentTime(TimeSlot timeSlot) {
 
         Calendar currentTime = Calendar.getInstance();
@@ -241,6 +290,11 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method to get TimeSlot from DataSnapshot and convert it to TimeSlot object
+     * @param timeSlot DataSnaphot with data
+     * @return TimeSlot containing TimeSlot data.
+     */
     private TimeSlot extractTimeSlot(DataSnapshot timeSlot) {
         return new TimeSlot(timeSlot.child("month").getValue().toString(),
                 timeSlot.child("day").getValue().toString(), timeSlot.child("hour").getValue().toString(),
