@@ -54,7 +54,7 @@ public class ActivityBarberSelectAppointment extends AppCompatActivity {
     }
 
     /**
-     *
+     * Method to handle the user selecting SelectDate to choose Appointments from.
      * @param view
      */
     public void onClickSelectDate(View view) {
@@ -87,12 +87,20 @@ public class ActivityBarberSelectAppointment extends AppCompatActivity {
         datePickerDialog.show();
     }
 
+    /**
+     * Method to handle user clicking submit. It starts the new Activity for barber to manage
+     * selected Appointment.
+     * @param view
+     */
     public void onClickSubmit(View view) {
         Spinner spinner = findViewById(R.id.select_appointment_spinner);
         selectedTimeSlot = (TimeSlot) spinner.getSelectedItem();
         startActivity(new Intent(this, ActivityBarberManageAppointment.class));
     }
 
+    /**
+     * Method to get all the TimeSlots for the Barber and load them for the barber to view.
+     */
     private void getTimeSlots() {
         String month = Integer.toString(appointmentDate.get(Calendar.MONTH) + 1);
         String day = Integer.toString(appointmentDate.get(Calendar.DAY_OF_MONTH));
@@ -119,6 +127,12 @@ public class ActivityBarberSelectAppointment extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method to extract the information from the DataSnapshot sent by database, and casting
+     * that information into a TimeSlot object.
+     * @param timeSlot DataSnapshot returned from database.
+     * @return TimeSlot containing all the information from the database.
+     */
     private TimeSlot extractTimeSlot(DataSnapshot timeSlot) {
         return new TimeSlot(timeSlot.child("month").getValue().toString(),
                 timeSlot.child("day").getValue().toString(), timeSlot.child("hour").getValue().toString(),
@@ -126,14 +140,29 @@ public class ActivityBarberSelectAppointment extends AppCompatActivity {
                 (boolean)timeSlot.child("unavailable").getValue());
     }
 
+    /**
+     * Method to extract the Appointment object from DataSnapshot from database into
+     * Appointment object.
+     * @param appointment DataSnapshot with Appointment information.
+     * @return Appointment with database information.
+     */
     private Appointment extractAppointment(DataSnapshot appointment) {
         return (appointment.getValue() == null)?null:new Appointment(appointment.child("notes").getValue().toString(),appointment.child("url").getValue().toString(),extractCustomer(appointment.child("customer")));
     }
 
+    /**
+     * Method to extract the Customer information from the DataSnapshot from databse.
+     * @param customer DataSnapshot containing the customer information.
+     * @return Customer with all the customer information.
+     */
     private Customer extractCustomer(DataSnapshot customer) {
         return new Customer(customer.child("firstName").getValue().toString(), customer.child("lastName").getValue().toString(), customer.child("phoneNumber").getValue().toString(), customer.child("email").getValue().toString());
     }
 
+    /**
+     * Method to populate the spinner with Appointments for barber to view. It only populates that
+     * are available and booked by a customer.
+     */
     private void populateSpinner() {
         Spinner spinner = findViewById(R.id.select_appointment_spinner);
 
