@@ -22,6 +22,7 @@
             android:layout_height="@dimen/button_vertical_dimension"
             android:onClick="onClickOpenBarberLogIn"/>
         <Button
+            android:id="@+id/customer"
             android:text="@string/button_launch_customer_activity"
             android:textSize="@dimen/button_text_size"
             android:layout_width="match_parent"
