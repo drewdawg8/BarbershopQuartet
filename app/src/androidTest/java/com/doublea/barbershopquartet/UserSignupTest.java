@@ -72,10 +72,15 @@ public class UserSignupTest {
         onView(ViewMatchers.withText("SUBMIT")).perform(click());
 //        delay(2000);
         onView(withId(R.id.edit_text_first_name)).perform( replaceText("John"),closeSoftKeyboard());
+        delay(1000);
         onView(withId(R.id.edit_text_last_name)).perform(clearText(),replaceText("Doe"),closeSoftKeyboard());
+        delay(1000);
         onView(withId(R.id.edit_text_phone_number)).perform(clearText(),replaceText("555-757-9999"),closeSoftKeyboard());
+        delay(1000);
         onView(withId(R.id.edit_text_email)).perform(clearText(),replaceText("JohnDoe@gmail.com"),closeSoftKeyboard());
+        delay(1000);
         onView(withId(R.id.edit_text_notes)).perform(clearText(),replaceText("Mohawk please"),closeSoftKeyboard());
+        delay(1000);
         onView(withId(R.id.button_reserve_appointment)).perform(click());
         delay(1000);
 
@@ -101,6 +106,28 @@ public class UserSignupTest {
         //Click Next
         onView(withId(R.id.next_button)).perform(click());
         delay(3000);
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)));
+        // Press Okay
+        onView(ViewMatchers.withText("OK")).perform(click());
+        // Select time slot
+        onView(withId(R.id.spinner)).perform(click());
+        onData(anything()).atPosition(8).perform(click());
+        delay(2000);
+        onView(ViewMatchers.withText("SUBMIT")).perform(click());
+        onView(withId(R.id.edit_text_first_name)).perform( replaceText("John"),closeSoftKeyboard());
+        delay(1000);
+        onView(withId(R.id.edit_text_last_name)).perform(clearText(),replaceText("Doe"),closeSoftKeyboard());
+        delay(1000);
+        onView(withId(R.id.edit_text_phone_number)).perform(clearText(),replaceText("555-757-9999"),closeSoftKeyboard());
+        delay(1000);
+        onView(withId(R.id.edit_text_email)).perform(clearText(),replaceText("JohnDoe@gmail.com"),closeSoftKeyboard());
+        delay(1000);
+        onView(withId(R.id.edit_text_notes)).perform(clearText(),replaceText("Mohawk please"),closeSoftKeyboard());
+        delay(1000);
+        onView(withId(R.id.button_reserve_appointment)).perform(click());
+        delay(1000);
+
     }
 
 
