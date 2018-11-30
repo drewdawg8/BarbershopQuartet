@@ -86,6 +86,12 @@ public class ActivityCustomerFillOutAppointment extends AppCompatActivity {
         }
         customer.setPhoneNumber(edit.getText().toString());
         edit = (EditText)findViewById(R.id.edit_text_notes);
+        if(edit.getText().toString().length() > 500){
+            entered = false;
+            edit.setHintTextColor(Color.RED);
+            Toast.makeText(ActivityCustomerFillOutAppointment.this, "Make sure notes are less than 500 characters", Toast.LENGTH_SHORT).show();
+
+        }
         appointment.setCustomer(customer);
         appointment.setNotes(edit.getText().toString());
         appointment.setURL(this.url);
