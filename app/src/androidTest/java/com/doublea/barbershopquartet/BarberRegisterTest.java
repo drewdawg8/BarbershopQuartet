@@ -23,6 +23,13 @@ public class BarberRegisterTest {
             e.printStackTrace();
         }
     }
+    public void sleep(int x){
+        try {
+            Thread.sleep(1000 * x);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Rule
     public ActivityTestRule mActivityRule = new ActivityTestRule<>(ActivityMain.class);
@@ -49,7 +56,7 @@ public class BarberRegisterTest {
         onView(withId(R.id.register_edit_text_description)).perform(replaceText("This is a description"), closeSoftKeyboard());
         sleep();
         onView(withId(R.id.register_button_register)).perform(click());
-        sleep();
+        sleep(10);
         assertTrue(auth != null);
     }
 }
