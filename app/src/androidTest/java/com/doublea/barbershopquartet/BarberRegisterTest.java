@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.junit.Assert.assertTrue;
@@ -45,10 +46,10 @@ public class BarberRegisterTest {
         onView(withId(R.id.register_edit_text_email)).perform(replaceText("firstname@email.com"));
         onView(withId(R.id.register_edit_text_password)).perform(replaceText("test123"));
         onView(withId(R.id.register_edit_text_confirm_password)).perform(replaceText("test123"));
-        onView(withId(R.id.register_edit_text_description)).perform(replaceText("This is a description"));
+        onView(withId(R.id.register_edit_text_description)).perform(replaceText("This is a description"), closeSoftKeyboard());
         sleep();
         onView(withId(R.id.register_button_register)).perform(click());
-
+        sleep();
         assertTrue(auth != null);
     }
 }
