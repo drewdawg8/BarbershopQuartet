@@ -66,7 +66,7 @@ public class UserSignupTest {
         // Press Okay
         onView(ViewMatchers.withText("OK")).perform(click());
         // Select time slot
-        onView(withId(77)).perform(click());
+        onView(withId(R.id.spinner)).perform(click());
         onData(anything()).atPosition(8).perform(click());
         delay(2000);
         onView(ViewMatchers.withText("SUBMIT")).perform(click());
