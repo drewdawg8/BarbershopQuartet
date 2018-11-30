@@ -15,6 +15,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withSpinnerText
 import static org.hamcrest.CoreMatchers.anything;
 import static org.hamcrest.core.AllOf.allOf;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class FirebaseInteractionTest {
@@ -33,13 +34,17 @@ public class FirebaseInteractionTest {
         // Launch Main Activity
         // click the customer button
         firebase = new FirebaseInteraction();
-        Car buggatti = new Car("Buggatti", 4);
+        final Car buggatti = new Car("Buggatti", 4);
         firebase.write("Cars/" + buggatti.getName(), buggatti);
         delay(3000);
-        firebase.read("Cards/" + buggatti.getName(), new FirebaseReadListener() {
+        firebase.read("Cars/" + buggatti.getName(), new FirebaseReadListener() {
             @Override
             public void onSuccess(DataSnapshot data) {
                 Car newCar = new Car(data.child("name").getValue().toString(),Integer.parseInt(data.child("numOfWheels").getValue().toString()));
+                firebase.write("Cars",null);
+                assertEquals(newCar.getName(), "Buggatti");
+                assertEquals(newCar.getNumOfWheels(), 4);
+                assertTrue(buggatti.isEqual((newCar)));
             }
 
             @Override
@@ -50,7 +55,6 @@ public class FirebaseInteractionTest {
     }
     class Car {
         String name = "";
-        String brand = "";
         int numOfWheels = 0;
         public Car(String name, int numOfWheels){
             this.name = name;
@@ -70,14 +74,6 @@ public class FirebaseInteractionTest {
 
         public void setNumOfWheels(int numOfWheels) {
             this.numOfWheels = numOfWheels;
-        }
-
-        public String getBrand() {
-            return brand;
-        }
-
-        public void setBrand(String brand) {
-            this.brand = brand;
         }
 
         public boolean isEqual(Car car) {
