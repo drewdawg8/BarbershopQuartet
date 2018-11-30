@@ -43,7 +43,7 @@ public class BarberRegisterTest {
         onView(withId(R.id.register_edit_text_last_name)).perform(replaceText("Lastname"));
         onView(withId(R.id.register_edit_text_phone_number)).perform(replaceText("7035551234"));
         onView(withId(R.id.register_edit_text_email)).perform(replaceText("firstname@email.com"));
-        onView(withId(R.id.register_edit_text_password)).perform(replaceText("test123"))
+        onView(withId(R.id.register_edit_text_password)).perform(replaceText("test123"));
         onView(withId(R.id.register_edit_text_confirm_password)).perform(replaceText("test123"));
         onView(withId(R.id.register_edit_text_description)).perform(replaceText("This is a description"));
         sleep();
