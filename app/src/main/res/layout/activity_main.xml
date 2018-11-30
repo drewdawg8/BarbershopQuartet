@@ -15,6 +15,7 @@
         android:orientation="vertical"
         android:layout_centerInParent="true">
         <Button
+            android:id="@+id/main_btn_barber"
             android:text="@string/button_launch_barber_activity"
             android:textSize="@dimen/button_text_size"
             android:layout_width="match_parent"
