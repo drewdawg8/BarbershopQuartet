@@ -72,10 +72,10 @@ public class UserSignupTest {
         onView(ViewMatchers.withText("SUBMIT")).perform(click());
 //        delay(2000);
         onView(withId(R.id.edit_text_first_name)).perform( replaceText("John"),closeSoftKeyboard());
-        /** onView(withId(R.id.edit_text_last_name)).perform(clearText(),typeText("Doe"));
-        onView(withId(R.id.edit_text_phone_number)).perform(clearText(),typeText("555-757-9999"));
-        onView(withId(R.id.edit_text_email)).perform(clearText(),typeText("JohnDoe@gmail.com"));
-        onView(withId(R.id.edit_text_notes)).perform(clearText(),typeText("Mohawk please"));**/
+        onView(withId(R.id.edit_text_last_name)).perform(clearText(),replaceText("Doe"),closeSoftKeyboard());
+        onView(withId(R.id.edit_text_phone_number)).perform(clearText(),replaceText("555-757-9999"),closeSoftKeyboard());
+        onView(withId(R.id.edit_text_email)).perform(clearText(),replaceText("JohnDoe@gmail.com"),closeSoftKeyboard());
+        onView(withId(R.id.edit_text_notes)).perform(clearText(),replaceText("Mohawk please"),closeSoftKeyboard());
         onView(withId(R.id.button_reserve_appointment)).perform(click());
         delay(1000);
 
