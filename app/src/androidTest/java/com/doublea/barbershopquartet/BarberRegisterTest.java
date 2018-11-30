@@ -34,7 +34,7 @@ public class BarberRegisterTest {
             auth.signOut();
         }
 
-        onView(withId(R.id.barber)).perform(click());
+        onView(withId(R.id.main_button_barber)).perform(click());
         sleep();
         onView(withId(R.id.tv_register)).perform(click());
         sleep();
