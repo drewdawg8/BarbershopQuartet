@@ -72,7 +72,7 @@ public class ActivityCustomerFillOutAppointment extends AppCompatActivity {
         }
         customer.setLastName(edit.getText().toString());
         edit = (EditText)findViewById(R.id.edit_text_email);
-        if(edit.getText().toString().equals("")  || edit.getText().toString().length() >= 20){
+        if(edit.getText().toString().equals("")  || edit.getText().toString().length() >= 100){
             entered = false;
             edit.setHintTextColor(Color.RED);
             Toast.makeText(ActivityCustomerFillOutAppointment.this, "Make sure your input is between 1 and 20 characters", Toast.LENGTH_SHORT).show();
