@@ -4,6 +4,8 @@ import android.support.test.espresso.contrib.PickerActions;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import org.hamcrest.Matchers;
 import org.junit.Rule;
@@ -13,13 +15,20 @@ import java.util.Calendar;
 
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.replaceText;
+import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
+import static android.support.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static org.hamcrest.CoreMatchers.anything;
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.core.AllOf.allOf;
 
 public class UserSignupTest {
     public void delay(int x){
@@ -45,7 +54,6 @@ public class UserSignupTest {
         delay(3000);
         //Click the 3rd option in the drop down
         onData(anything()).atPosition(2).perform(click());
-        delay(3000);
         //Check it matches
         onView(withId(R.id.spinner)).check(matches(withSpinnerText(containsString("Drew Stewart"))));
         delay(3000);
@@ -57,7 +65,19 @@ public class UserSignupTest {
                 Calendar.getInstance().get(Calendar.DAY_OF_MONTH)));
         // Press Okay
         onView(ViewMatchers.withText("OK")).perform(click());
-        delay(3000);
+        // Select time slot
+        onView(withId(77)).perform(click());
+        onData(anything()).atPosition(8).perform(click());
+        delay(2000);
+        onView(ViewMatchers.withText("SUBMIT")).perform(click());
+//        delay(2000);
+        onView(withId(R.id.edit_text_first_name)).perform( replaceText("John"),closeSoftKeyboard());
+        /** onView(withId(R.id.edit_text_last_name)).perform(clearText(),typeText("Doe"));
+        onView(withId(R.id.edit_text_phone_number)).perform(clearText(),typeText("555-757-9999"));
+        onView(withId(R.id.edit_text_email)).perform(clearText(),typeText("JohnDoe@gmail.com"));
+        onView(withId(R.id.edit_text_notes)).perform(clearText(),typeText("Mohawk please"));**/
+        onView(withId(R.id.button_reserve_appointment)).perform(click());
+        delay(1000);
 
     }
 

@@ -266,6 +266,9 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        // This causes the format to become weird. not sure why.
+        final int id = 77;
+        spinner.setId(id);
     }
 
     /**
