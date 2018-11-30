@@ -202,7 +202,6 @@ public class ActivityCustomerAppointmentRequest extends AppCompatActivity {
                 populateSpinnerTimeSlots(m + 1, d);
                 textView.setText("Choose a Time Slot for your Appointment");
                 button.setText("Submit");
-
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(y, m, d);
 
