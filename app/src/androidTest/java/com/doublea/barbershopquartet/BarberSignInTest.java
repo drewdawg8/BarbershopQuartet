@@ -1,6 +1,8 @@
 package com.doublea.barbershopquartet;
 
 import android.support.test.rule.ActivityTestRule;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -16,6 +18,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withSpinnerText
 import static org.hamcrest.CoreMatchers.anything;
 import static org.hamcrest.core.AllOf.allOf;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class BarberSignInTest {
@@ -49,6 +52,16 @@ public class BarberSignInTest {
         //Click sign in
         onView(withId(R.id.btn_login)).perform(click());
         assertTrue(mAuth != null);
+    }
+    @Test
+    public void barberLogsOut(){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        if (mAuth == null)
+            barberLogsIn();
+        onView(withId(R.id.main_button_barber)).perform(click());
+        delay(3000);
+        onView(withId(R.id.logout)).perform(click());
+        delay(10000);
     }
 
 }
