@@ -152,6 +152,7 @@ public class ActivityCustomerFillOutAppointment extends AppCompatActivity {
         intent.setType("image/*");
 
         startActivityForResult(intent, READ_REQUEST_CODE);
+
     }
 
     /**
