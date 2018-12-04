@@ -29,16 +29,24 @@ public class BarberRegisterTest {
     @Rule
     public ActivityTestRule mActivityRule = new ActivityTestRule<>(ActivityMain.class);
 
-    @Before
+    @Test
+    public void testEverything(){
+        initializeFirebaseObjects();
+        testBarberRegister();
+        testNewBarberLogin();
+        testDatabaseInitialization();
+        deleteTestBarber();
+    }
+
     public void initializeFirebaseObjects() {
         auth = FirebaseAuth.getInstance();
         firebase = new FirebaseInteraction();
     }
 
-    @Test
     public void testBarberRegister() {
         if (auth != null) {
             auth.signOut();
+            auth = null;
         }
 
         onView(withId(R.id.main_button_barber)).perform(click());
@@ -56,28 +64,27 @@ public class BarberRegisterTest {
         sleep();
         onView(withId(R.id.register_button_register)).perform(click());
         sleep(10);
+        auth = FirebaseAuth.getInstance();
         assertTrue(auth != null);
         onView(withId(R.id.logout)).perform(click());
     }
 
-    @Test
     public void testNewBarberLogin() {
         if (auth != null) {
             auth.signOut();
+            auth = null;
         }
 
-        onView(withId(R.id.main_button_barber)).perform(click());
-        sleep();
         onView(withId(R.id.login_edit_text_email)).perform(replaceText("firstname@email.com"));
         onView(withId(R.id.login_edit_text_password)).perform(replaceText("test123"));
         onView(withId(R.id.btn_login)).perform(click());
         sleep();
+        auth = FirebaseAuth.getInstance();
         assertTrue(auth != null);
         assertTrue(auth.getCurrentUser().getEmail().equals("firstname@email.com"));
         //onView(withId(R.id.logout)).perform(click());
     }
 
-    @Test
     public void testDatabaseInitialization() {
         String uid = auth.getUid();
 
@@ -103,7 +110,6 @@ public class BarberRegisterTest {
         });
     }
 
-    @After
     public void deleteTestBarber() {
         String uid = auth.getUid();
         String path = "Barbers/" + uid;
